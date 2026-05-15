@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Practice Growth Engine — DentalEdge Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #4B3AC9;
+    --purple-dark: #2D1F9E;
+    --purple-deep: #1A1063;
+    --purple-light: #EEEcFF;
+    --purple-mid: #7B6EE8;
+    --coral: #E8472A;
+    --coral-light: #FFF1EE;
+    --coral-dark: #B03318;
+    --ink: #0F0D1A;
+    --ink-60: #4A4660;
+    --ink-40: #8C89A0;
+    --surface: #F7F6FB;
+    --border: #E4E1F5;
+    --white: #FFFFFF;
+    --gold: #C9962A;
+    --gold-light: #FFF8E8;
+    --green: #1A7A52;
+    --green-light: #E8F7F1;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: #FFFFFF;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    .no-print { display: none !important; }
+    .page { page-break-after: always; }
+    .page:last-child { page-break-after: avoid; }
+    body { font-size: 13px; }
+    @page { margin: 0; size: A4; }
+  }
+
+  /* ─── TYPOGRAPHY ─── */
+  h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.15; }
+  h1 { font-size: 52px; font-weight: 800; }
+  h2 { font-size: 30px; font-weight: 700; }
+  h3 { font-size: 20px; font-weight: 600; }
+  h4 { font-size: 15px; font-weight: 600; }
+  p { line-height: 1.7; color: var(--ink-60); }
+  strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── LAYOUT ─── */
+  .page {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 48px;
+    background: #fff;
+    box-shadow: 0 4px 40px rgba(75,58,201,0.10);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    scroll-margin-top: 60px;
+  }
+
+  .section-inner {
+    padding: 56px 64px;
+  }
+
+  /* ─── TOOLBAR ─── */
+  .toolbar {
+    background: var(--purple-deep);
+    color: white;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toolbar-brand {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.02em;
+  }
+  .toolbar-brand span { color: #A89FF5; }
+  .toolbar-actions { display: flex; gap: 10px; }
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-white { background: white; color: var(--purple); }
+  .btn-white:hover { background: var(--purple-light); }
+  .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.35); }
+  .btn-outline:hover { background: rgba(255,255,255,0.10); }
+  .btn-coral { background: var(--coral); color: white; }
+  .btn-coral:hover { background: var(--coral-dark); }
+  .btn-green { background: #1A7A52; color: white; }
+  .btn-green:hover { background: #145e3f; }
+
+  /* ─── COVER ─── */
+  .cover { min-height: 680px; display: flex; flex-direction: column; }
+  .cover-top {
+    background: var(--purple-deep);
+    flex: 1;
+    padding: 56px 64px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-top::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(123,110,232,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover-top::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(232,71,42,0.20) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 64px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-logo-mark {
+    width: 44px;
+    height: 44px;
+    background: var(--coral);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+  }
+  .cover-logo-text {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+  }
+  .cover-logo-text span { color: #A89FF5; font-weight: 400; font-size: 13px; display: block; }
+  .cover-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #A89FF5;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.08;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-title .accent { color: #FF7A5C; }
+  .cover-subtitle {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+    max-width: 480px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-meta-bar {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-meta-item { }
+  .cover-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #A89FF5;
+    margin-bottom: 4px;
+  }
+  .cover-meta-value {
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+  }
+  .cover-meta-value input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    width: 200px;
+    outline: none;
+    padding: 2px 0;
+  }
+  .cover-meta-value input::placeholder { color: rgba(255,255,255,0.35); }
+  .cover-bottom {
+    background: var(--surface);
+    padding: 32px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .cover-stat { text-align: center; }
+  .cover-stat-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--purple);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cover-stat-label { font-size: 12px; color: var(--ink-40); line-height: 1.3; max-width: 90px; }
+  .cover-bottom-divider { width: 1px; height: 40px; background: var(--border); }
+
+  /* ─── TOC ─── */
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 28px; }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.15s;
+    cursor: pointer;
+    color: inherit;
+  }
+  .toc-item:hover { border-color: var(--purple-mid); background: var(--purple-light); }
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--purple-mid);
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+  .toc-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .toc-arrow { margin-left: auto; color: var(--ink-40); font-size: 13px; }
+
+  /* ─── SECTION HEADERS ─── */
+  .sec-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple-mid);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sec-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--coral);
+  }
+  .sec-heading { color: var(--ink); margin-bottom: 8px; }
+  .sec-sub { font-size: 15px; color: var(--ink-60); line-height: 1.65; margin-bottom: 32px; }
+
+  /* ─── DARK SECTION ─── */
+  .dark-section {
+    background: var(--purple-deep);
+    padding: 56px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dark-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(123,110,232,0.3) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .dark-section .sec-eyebrow { color: #A89FF5; }
+  .dark-section .sec-heading { color: white; }
+  .dark-section .sec-sub { color: rgba(255,255,255,0.65); }
+
+  /* ─── PAIN CARDS ─── */
+  .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .pain-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .pain-icon { font-size: 18px; margin-bottom: 10px; }
+  .pain-title { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 600; color: white; margin-bottom: 6px; }
+  .pain-text { font-size: 13px; color: rgba(255,255,255,0.60); line-height: 1.6; }
+  .pain-impact {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: rgba(232,71,42,0.20);
+    color: #FF7A5C;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* ─── DIFFERENTIATOR ─── */
+  .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .diff-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .diff-card.featured {
+    border-color: var(--purple);
+    background: var(--purple-light);
+  }
+  .diff-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-40);
+    margin-bottom: 10px;
+  }
+  .diff-title { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .diff-text { font-size: 13px; color: var(--ink-60); line-height: 1.6; }
+  .diff-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--coral);
+    color: white;
+    font-weight: 600;
+  }
+
+  /* ─── COMPETITOR TABLE ─── */
+  .comp-table-wrap { overflow-x: auto; margin-top: 24px; }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .comp-table th {
+    background: var(--purple-deep);
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 12px 14px;
+    text-align: left;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .comp-table th.highlight { background: var(--purple); }
+  .comp-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-60);
+    vertical-align: middle;
+  }
+  .comp-table td.highlight {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    font-weight: 600;
+  }
+  .comp-table tr:hover td { background: var(--surface); }
+  .comp-table tr:hover td.highlight { background: #E0DCFF; }
+  .check { color: #1A7A52; font-size: 14px; }
+  .cross { color: #C0BDCE; font-size: 14px; }
+  .partial { color: var(--gold); font-size: 13px; }
+
+  /* ─── PACKAGES ─── */
+  .packages-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+  .pkg-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .pkg-card.featured {
+    border: 2px solid var(--purple);
+    position: relative;
+  }
+  .pkg-featured-badge {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--purple);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 0 0 8px 8px;
+    white-space: nowrap;
+    font-family: 'Sora', sans-serif;
+  }
+  .pkg-header { padding: 24px 18px 16px; }
+  .pkg-tier {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+    margin-bottom: 8px;
+  }
+  .pkg-name { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .pkg-tagline { font-size: 12px; color: var(--ink-40); line-height: 1.5; margin-bottom: 16px; }
+  .pkg-price { }
+  .pkg-price-amount {
+    font-family: 'Sora', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--purple);
+  }
+  .pkg-price-period { font-size: 12px; color: var(--ink-40); font-weight: 400; }
+  .pkg-setup { font-size: 11px; color: var(--ink-40); margin-top: 3px; }
+  .pkg-divider { height: 1px; background: var(--border); margin: 0 18px; }
+  .pkg-features { padding: 16px 18px; flex: 1; }
+  .pkg-feat-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12.5px;
+    color: var(--ink-60);
+    line-height: 1.45;
+  }
+  .pkg-feat-item .feat-check { color: var(--green); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .pkg-next {
+    margin: 0 18px 10px;
+    padding: 9px 12px;
+    border-top: 0.5px solid var(--border);
+    font-size: 11.5px;
+    color: var(--ink-40);
+    line-height: 1.55;
+  }
+  .pkg-next-label {
+    font-weight: 500;
+    color: var(--purple-mid);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .pkg-problem {
+    margin: 0 18px 18px;
+    padding: 10px 12px;
+    background: var(--surface);
+    border-radius: 6px;
+    font-size: 11.5px;
+    color: var(--ink-60);
+    line-height: 1.5;
+  }
+  .pkg-problem strong { color: var(--ink); }
+
+  /* ─── ALACARTE TABLE ─── */
+  .ac-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+  .ac-table th {
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+  .ac-table th:last-child { text-align: right; }
+  .ac-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .ac-table td:last-child { text-align: right; white-space: nowrap; width: 110px; }
+  .ac-table tr:last-child td { border-bottom: none; }
+  .ac-service-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .ac-service-desc { font-size: 12.5px; color: var(--ink-60); line-height: 1.5; }
+  .ac-price {
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--purple);
+    white-space: nowrap;
+  }
+  .ac-price-note { font-size: 11px; color: var(--ink-40); margin-top: 2px; }
+  .ac-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .badge-ops { background: var(--green-light); color: var(--green); }
+  .badge-growth { background: var(--purple-light); color: var(--purple); }
+  .badge-ai { background: var(--gold-light); color: var(--gold); }
+  .badge-new { background: #FFF0ED; color: var(--coral-dark); }
+
+  /* ─── ROI SECTION ─── */
+  .roi-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 24px; }
+  .roi-card {
+    padding: 22px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .roi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .roi-card.c1::before { background: var(--green); }
+  .roi-card.c2::before { background: var(--purple); }
+  .roi-card.c3::before { background: var(--coral); }
+  .roi-card.c4::before { background: var(--gold); }
+  .roi-card.c5::before { background: #2196F3; }
+  .roi-card.c6::before { background: #9C27B0; }
+  .roi-what { font-size: 12px; color: var(--ink-40); margin-bottom: 8px; }
+  .roi-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .roi-label { font-size: 13px; color: var(--ink-60); line-height: 1.5; }
+
+  /* ─── IMPLEMENTATION TIMELINE ─── */
+  .timeline-list { margin-top: 28px; }
+  .tl-item {
+    display: flex;
+    gap: 24px;
+    padding-bottom: 32px;
+    position: relative;
+  }
+  .tl-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-left { flex-shrink: 0; text-align: center; width: 40px; }
+  .tl-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .tl-timing {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    color: var(--ink-40);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .tl-body { flex: 1; padding-top: 8px; }
+  .tl-phase { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .tl-desc { font-size: 13.5px; color: var(--ink-60); line-height: 1.65; margin-bottom: 12px; }
+  .tl-items { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tl-tag {
+    font-size: 11.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--surface);
+    color: var(--ink-60);
+    border: 1px solid var(--border);
+  }
+
+  /* ─── ROLES SECTION ─── */
+  .roles-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .role-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .role-header { padding: 20px; }
+  .role-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .role-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+  .role-sub { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .role-body { padding: 18px 20px; }
+  .role-headline { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; line-height: 1.4; }
+  .role-items { list-style: none; }
+  .role-items li {
+    font-size: 12.5px;
+    color: var(--ink-60);
+    padding: 5px 0 5px 16px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .role-items li:last-child { border-bottom: none; }
+  .role-items li::before { content: '→'; position: absolute; left: 0; color: var(--purple-mid); font-size: 11px; top: 6px; }
+
+  /* ─── QUOTES ─── */
+  .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .testimonial {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"';
+    font-family: 'Sora', sans-serif;
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--purple-light);
+    position: absolute;
+    top: 8px;
+    left: 18px;
+    line-height: 1;
+  }
+  .testimonial-text {
+    font-size: 13.5px;
+    color: var(--ink-60);
+    line-height: 1.65;
+    padding-top: 20px;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .testimonial-author { font-size: 12px; font-weight: 600; color: var(--ink); }
+  .testimonial-role { font-size: 11px; color: var(--ink-40); }
+
+  /* ─── OBJECTION BOX ─── */
+  .objection-list { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+  .obj-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .obj-q {
+    padding: 14px 18px;
+    background: var(--surface);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .obj-q::before { content: 'Q'; background: var(--ink); color: white; border-radius: 4px; padding: 1px 5px; font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+  .obj-a {
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: var(--ink-60);
+    line-height: 1.65;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .obj-a::before { content: 'A'; background: var(--purple); color: white; border-radius: 4px; padding: 1px 5px; font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--purple-deep) 0%, #2D1F9E 50%, #4B3AC9 100%);
+    padding: 56px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .cta-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #A89FF5;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-heading {
+    font-family: 'Sora', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 12px;
+    line-height: 1.15;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-big {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 30px;
+    border-radius: 8px;
+  }
+  .cta-contact {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-contact-item {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cta-contact-item strong { color: white; }
+
+  /* ─── FOOTER ─── */
+  .proposal-footer {
+    background: var(--ink);
+    padding: 24px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .footer-brand {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+  }
+  .footer-brand span { color: #A89FF5; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-link { font-size: 12px; color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-link:hover { color: white; }
+
+  /* ─── MISC ─── */
+  .divider { height: 1px; background: var(--border); margin: 32px 0; }
+  .callout {
+    background: var(--purple-light);
+    border: 1px solid var(--purple-mid);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: var(--purple-dark);
+    line-height: 1.6;
+    margin: 20px 0;
+  }
+  .callout strong { color: var(--purple-deep); }
+  .callout-coral {
+    background: var(--coral-light);
+    border-color: var(--coral);
+    color: var(--coral-dark);
+  }
+  .callout-coral strong { color: var(--coral-dark); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .highlight-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--purple);
+    line-height: 1;
+  }
+  .page-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+    padding: 8px 64px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .discount-banner {
+    background: var(--gold-light);
+    border: 1px solid #E0BC60;
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .discount-banner .disc-icon { font-size: 22px; }
+  .discount-banner .disc-text { font-size: 13.5px; color: var(--ink-60); line-height: 1.5; }
+  .discount-banner .disc-text strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar no-print">
+  <div class="toolbar-brand">Dental<span>Edge</span> Solutions — Proposal Builder</div>
+  <div class="toolbar-actions">
+    <button class="btn btn-outline" onclick="window.print()">⎙ Print / Export PDF</button>
+    <button class="btn btn-green" onclick="downloadProposal()">&#8595; Download Personalized</button>
+    <a class="btn btn-coral" href="https://dentaledgesolutions.com" target="_blank">Book Free Audit →</a>
+  </div>
+</div>
+
+<!-- PAGE 1: COVER -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-top">
+      <div class="cover-logo">
+        <div class="cover-logo-mark">D</div>
+        <div class="cover-logo-text">
+          DentalEdge Solutions
+          <span>dentaledgesolutions.com</span>
+        </div>
+      </div>
+      <div class="cover-eyebrow">Marketing Services Proposal</div>
+      <div class="cover-title">The Practice<br>Growth <span class="accent">Engine.</span></div>
+      <div class="cover-subtitle">A complete, done-for-you system that plugs revenue leaks, automates your front desk, and delivers consistent high-value patient growth.</div>
+      <div class="cover-meta-bar">
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Prepared for</div>
+          <div class="cover-meta-value"><!-- VS Code tip: set value="" below to the practice name, e.g. value="Miami Smiles Dental" -->
+          <input type="text" placeholder="Practice Name" id="practice-name" value="" oninput="syncName(this.value)"></div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Decision maker</div>
+          <div class="cover-meta-value"><!-- VS Code tip: set value="" below to the doctor/owner name, e.g. value="Dr. Ana García" -->
+          <input type="text" placeholder="Dr. / Owner Name" id="owner-name" value=""></div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Date</div>
+          <div class="cover-meta-value" id="proposal-date"></div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Prepared by</div>
+          <div class="cover-meta-value">DentalEdge Solutions</div>
+        </div>
+      </div>
+    </div>
+    <div class="cover-bottom">
+      <div class="cover-stat">
+        <div class="cover-stat-num">$200K</div>
+        <div class="cover-stat-label">Recovered per year from no-shows & cancellations</div>
+      </div>
+      <div class="cover-bottom-divider"></div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">70%</div>
+        <div class="cover-stat-label">Of appointments confirmed automatically</div>
+      </div>
+      <div class="cover-bottom-divider"></div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">24/7</div>
+        <div class="cover-stat-label">AI coverage with zero added staff</div>
+      </div>
+      <div class="cover-bottom-divider"></div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">25 hrs</div>
+        <div class="cover-stat-label">Per week saved by front desk automation</div>
+      </div>
+      <div class="cover-bottom-divider"></div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">4.8★</div>
+        <div class="cover-stat-label">Avg Google rating after 90 days</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: TABLE OF CONTENTS -->
+<div class="page">
+  <div class="page-label"><span>Contents</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">This Proposal</div>
+    <h2 class="sec-heading">What's Inside</h2>
+    <p class="sec-sub">This proposal walks you through the real problems costing your practice revenue, how our system solves them — and exactly what it costs. No jargon. No vague promises. Just a clear, phased path to a more profitable practice.</p>
+    <div class="toc-grid">
+      <a class="toc-item" href="#section-01"><span class="toc-num">01</span><span class="toc-name">The Real Cost of Doing Nothing</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-02"><span class="toc-num">02</span><span class="toc-name">Why DentalEdge Solutions</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-03"><span class="toc-num">03</span><span class="toc-name">Competitive Landscape</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-04"><span class="toc-num">04</span><span class="toc-name">The Practice Growth Engine Packages</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-05"><span class="toc-num">05</span><span class="toc-name">À La Carte Service Menu & Pricing</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-06"><span class="toc-num">06</span><span class="toc-name">Your ROI — What to Expect</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-07"><span class="toc-num">07</span><span class="toc-name">Who This Is Built For</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-08"><span class="toc-num">08</span><span class="toc-name">Implementation Roadmap</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-09"><span class="toc-num">09</span><span class="toc-name">Common Questions Answered</span><span class="toc-arrow">→</span></a>
+      <a class="toc-item" href="#section-10"><span class="toc-num">10</span><span class="toc-name">Next Steps</span><span class="toc-arrow">→</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: THE REAL COST -->
+<div class="page" id="section-01">
+  <div class="dark-section">
+    <div class="sec-eyebrow">01 — The Real Cost of Doing Nothing</div>
+    <h2 class="sec-heading">Your practice is losing<br>significant revenue right now.</h2>
+    <p class="sec-sub">Not because of bad dentistry — because of invisible operational gaps that every independent practice in Southeast Florida faces. Here's where the money is going.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📞</div>
+        <div class="pain-title">Missed Calls = Missed Patients</div>
+        <div class="pain-text">Every unanswered call is a patient who calls the next dentist on the list. In a market where DSOs staff call centers 24/7, independent practices miss 20–35% of inbound calls daily.</div>
+        <div class="pain-impact">$1,500–$5,000+ lifetime value per lost lead</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🪑</div>
+        <div class="pain-title">No-Shows Destroying Chair Time</div>
+        <div class="pain-text">A practice with just 5 no-shows per week loses over $100,000 per year in production — while still paying full overhead for every empty chair slot.</div>
+        <div class="pain-impact">Up to $200,000/year in lost revenue</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⭐</div>
+        <div class="pain-title">Weak Reviews Losing New Patients</div>
+        <div class="pain-text">Over 80% of new patients read Google reviews before booking. A 3.9-star average with 25 reviews costs 30–40% of potential new patient traffic to a competitor with 4.8 stars and 200 reviews.</div>
+        <div class="pain-impact">30–40% of click-through traffic lost</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">👥</div>
+        <div class="pain-title">Dormant Patients Generating Nothing</div>
+        <div class="pain-text">The average practice has 30–40% of its patient database inactive. These patients already trust you — they just stopped hearing from you. Your most profitable acquisition channel is completely untapped.</div>
+        <div class="pain-impact">Highest-ROI revenue sitting idle</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🌐</div>
+        <div class="pain-title">Outdated Website Turning Patients Away</div>
+        <div class="pain-text">75% of patients judge your credibility by your website before ever calling. A slow, non-mobile-friendly, or outdated site loses patients at the first impression — before they ever contact you.</div>
+        <div class="pain-impact">Losing patients before they even call</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <div class="pain-title">Diagnosed Treatment Never Scheduled</div>
+        <div class="pain-text">Most practices have tens of thousands in presented but unscheduled treatment plans. Without a systematic follow-up, these patients — who already trust you and need the work — simply never come back.</div>
+        <div class="pain-impact">$30K–$100K in unbooked production</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4: WHY DES -->
+<div class="page" id="section-02">
+  <div class="page-label"><span>02 — Why DentalEdge Solutions</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">02 — Why DentalEdge Solutions</div>
+    <h2 class="sec-heading">One system. Every problem. Done for you.</h2>
+    <p class="sec-sub">The tools that power our system are available to anyone. What's rare is having a team with deep dental market expertise who configures them, manages them, and continuously optimizes them — so you never have to.</p>
+    <div class="diff-grid">
+      <div class="diff-card featured">
+        <div class="diff-badge">Core Advantage</div>
+        <div class="diff-num">01</div>
+        <div class="diff-title">Done-For-You — Not Software You Manage</div>
+        <div class="diff-text">Every competitor in this space sells you a software subscription and leaves you to figure it out. We deliver a fully implemented, running system. You run your practice. We run the technology.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">02</div>
+        <div class="diff-title">GoHighLevel Native Stack</div>
+        <div class="diff-text">One platform handles your CRM, automations, AI agents, website, funnels, ads attribution, and reporting. No duct-taped tool stack. No data gaps between disconnected software.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">03</div>
+        <div class="diff-title">Southeast Florida Market Expertise</div>
+        <div class="diff-text">We work exclusively with independent dental practices in Miami-Dade, Broward, and Palm Beach. We understand DSO competition, multilingual patient demographics, and local search dynamics — not generic dental marketing.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">04</div>
+        <div class="diff-title">Transparent Pricing — No Surprises</div>
+        <div class="diff-text">Every package and service is published with exact pricing. No discovery calls just to get a number. No locked-in multi-year contracts required to start. You know exactly what you're paying for before you sign anything.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">05</div>
+        <div class="diff-title">AI-Powered & HIPAA-Aware</div>
+        <div class="diff-text">AI Voice Agents, HIPAA-compliant review responses, 24/7 chatbots, and multilingual automations — capabilities that used to require enterprise budgets, now available to independent practices through our managed service.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">06</div>
+        <div class="diff-title">Phased Approach — Start Where You Are</div>
+        <div class="diff-text">Four tiers, each solving a distinct problem. Start with the package that matches your current biggest challenge and build up. Every tier includes everything from the previous one — no feature resets.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>The independent practice advantage:</strong> DSOs have corporate budgets. They don't have your patient relationships, your chair-side manner, or your community roots. Our system gives you everything they have technologically — without the corporate overhead or the brand dilution.
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: COMPETITIVE LANDSCAPE -->
+<div class="page" id="section-03">
+  <div class="page-label"><span>03 — Competitive Landscape</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">03 — Competitive Landscape</div>
+    <h2 class="sec-heading">How we compare to the alternatives.</h2>
+    <p class="sec-sub">There are plenty of tools and agencies in the dental space. Here's what they offer — and what only DentalEdge Solutions delivers.</p>
+    <div class="comp-table-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th style="width:200px">Capability</th>
+            <th>Weave</th>
+            <th>RevenueWell</th>
+            <th>Adit</th>
+            <th>MaxAssist</th>
+            <th>Aron AI</th>
+            <th>DoctorLogic</th>
+            <th class="highlight">DentalEdge Solutions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Professional Website Build</strong></td>
+            <td class="cross">✗</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>Automated Appointment Reminders</strong></td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>Missed Call Text-Back</strong></td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>AI Voice Agent (Inbound)</strong></td>
+            <td class="cross">✗</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>AI Review Responses (HIPAA)</strong></td>
+            <td class="partial">~</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>Google & Social Ads Management</strong></td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="check">✓</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>Website AI Chat Bot (24/7)</strong></td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>High-Value Case Funnels</strong></td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>Multilingual Communications (ES/CR)</strong></td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>Done-For-You Managed Service</strong></td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="partial">~</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>Transparent Published Pricing</strong></td>
+            <td class="cross">✗</td>
+            <td class="partial">~</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>SE Florida Local Expertise</strong></td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>Directory Listings (70+ platforms)</strong></td>
+            <td class="cross">✗</td>
+            <td class="partial">~</td>
+            <td class="partial">~</td>
+            <td class="partial">~</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+          <tr>
+            <td><strong>AEO / GEO — Data-Backed AI Citation Strategy</strong></td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="partial">~</td>
+            <td class="cross">✗</td>
+            <td class="highlight check">✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11.5px;color:var(--ink-40);margin-top:12px">✓ Full capability &nbsp;·&nbsp; ~ Partial or requires additional tools &nbsp;·&nbsp; ✗ Not available. Research current as of Q2 2025.</p>
+    <div class="callout" style="margin-top:20px">
+      <strong>The key insight:</strong> Software platforms like Weave, Adit, and RevenueWell sell you tools you must manage yourself. DoctorLogic builds strong websites and manages SEO and ads — but stops entirely at the digital marketing layer. None of them have a CRM, automation workflows, AI agents, or any patient communication stack. DentalEdge Solutions is the only entity in this comparison that covers the full patient lifecycle — from the moment someone searches online, to the moment they book, show up, leave a review, and return six months later — all in a single, fully managed service. And unlike DoctorLogic, our pricing is published. No demo call required to know what you'll pay.
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 6: PACKAGES OVERVIEW -->
+<div class="page" id="section-04">
+  <div class="page-label"><span>04 — Service Packages</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">04 — The Practice Growth Engine</div>
+    <h2 class="sec-heading">Four packages. One clear path.</h2>
+    <p class="sec-sub">Each tier solves a specific problem your practice faces right now. Every tier includes all features from the one before it — you build up, never sideways. Start where you are. Grow from there.</p>
+    <div class="packages-grid">
+
+      <!-- DIGITAL FOUNDATION -->
+      <div class="pkg-card">
+        <div class="pkg-header">
+          <div class="pkg-tier">Tier 01</div>
+          <div class="pkg-name">Digital Foundation</div>
+          <div class="pkg-tagline">Your professional digital front door — built to convert visitors into patients.</div>
+          <div class="pkg-price">
+            <div class="pkg-price-amount">$297<span class="pkg-price-period">/mo</span></div>
+            <div class="pkg-setup">$3,000 one-time setup</div>
+          </div>
+        </div>
+        <div class="pkg-divider"></div>
+        <div class="pkg-features">
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Professional WordPress website (5–10 pages)</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Mobile-optimized, fast-loading design</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Website hosting & ongoing maintenance</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Full CRM setup & configuration</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Online appointment scheduling</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Google Business Profile integration & optimization</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Business listed on 70+ directories (Yelp, Apple Maps, Healthgrades & more)</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> NAP consistency enforced everywhere — name, address & phone always accurate</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Foundational SEO on-page setup</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Contact forms & lead capture</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Analytics & tracking installed</div>
+        </div>
+        <div class="pkg-next"><span class="pkg-next-label">Upgrade to Efficiency Engine to unlock</span>Automated appointment reminders, no-show & cancellation recovery, missed-call text-back, AI-powered review responses, and two-way patient messaging.</div>
+        <div class="pkg-problem"><strong>Solves:</strong> Outdated or no online presence. Includes directory listing management across 70+ platforms so patients can find accurate practice information everywhere they search — not just on your website.</div>
+      </div>
+
+      <!-- EFFICIENCY ENGINE -->
+      <div class="pkg-card">
+        <div class="pkg-header">
+          <div class="pkg-tier">Tier 02</div>
+          <div class="pkg-name">Efficiency Engine</div>
+          <div class="pkg-tagline">Plug every revenue leak and free your front desk from manual work.</div>
+          <div class="pkg-price">
+            <div class="pkg-price-amount">$697<span class="pkg-price-period">/mo</span></div>
+            <div class="pkg-setup">$997 one-time setup</div>
+          </div>
+        </div>
+        <div class="pkg-divider"></div>
+        <div class="pkg-features">
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Everything in Digital Foundation</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Automated appointment reminders (SMS + email, multi-touch)</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> No-show & cancellation recovery automation</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Missed call text-back (instant, 24/7)</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Two-way patient SMS & email inbox</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Automated review request system</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> AI-powered review responses (HIPAA-compliant)</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> A2P/10DLC compliance registration</div>
+        </div>
+        <div class="pkg-next"><span class="pkg-next-label">Upgrade to Patient Acquisition to unlock</span>Google & social media ads management, dedicated landing pages, 24/7 AI chat bot on your website, and advanced lead follow-up automation.</div>
+        <div class="pkg-problem"><strong>Solves:</strong> Operational inefficiency and revenue leakage. Designed to pay for itself within 30 days through recovered no-shows and missed leads alone.</div>
+      </div>
+
+      <!-- PATIENT ACQUISITION -->
+      <div class="pkg-card featured">
+        <div class="pkg-featured-badge">Most Popular</div>
+        <div class="pkg-header" style="padding-top:36px">
+          <div class="pkg-tier">Tier 03</div>
+          <div class="pkg-name">Patient Acquisition</div>
+          <div class="pkg-tagline">Fill your schedule with consistent, predictable new patient flow.</div>
+          <div class="pkg-price">
+            <div class="pkg-price-amount">$1,497<span class="pkg-price-period">/mo</span></div>
+            <div class="pkg-setup">$1,500 setup + Ad Spend</div>
+          </div>
+        </div>
+        <div class="pkg-divider"></div>
+        <div class="pkg-features">
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Everything in Efficiency Engine</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Google & Social Media Ads (up to 3 campaigns)</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Dedicated ad landing pages per campaign</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Website AI chat bot — answers questions & books appointments 24/7</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Advanced lead follow-up automation</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> CRM pipeline & lead attribution</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> 2-minute automated lead response</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Monthly performance report</div>
+        </div>
+        <div class="pkg-next"><span class="pkg-next-label">Upgrade to Market Leader to unlock</span>AI Voice Agent for 24/7 inbound call handling, targeted high-value case campaigns (implants, cosmetics, Invisalign), automated patient recall & reactivation, and up to 10 active ad campaigns.</div>
+        <div class="pkg-problem"><strong>Solves:</strong> Inconsistent patient flow. For operationally efficient practices ready for systematic, measurable new patient growth.</div>
+      </div>
+
+      <!-- MARKET LEADER -->
+      <div class="pkg-card">
+        <div class="pkg-header">
+          <div class="pkg-tier">Tier 04</div>
+          <div class="pkg-name">Market Leader</div>
+          <div class="pkg-tagline">Become the undisputed independent practice in your local market.</div>
+          <div class="pkg-price">
+            <div class="pkg-price-amount">$2,497<span class="pkg-price-period">/mo</span></div>
+            <div class="pkg-setup">$2,500 setup + Ad Spend</div>
+          </div>
+        </div>
+        <div class="pkg-divider"></div>
+        <div class="pkg-features">
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Everything in Patient Acquisition</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Google & Social Ads (up to 10 campaigns)</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Targeted high-value case campaigns (implants, cosmetics, Invisalign)</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> AI Voice Agent — 24/7 inbound call coverage</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Automated patient recall & reactivation</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Monthly ROI reporting dashboard</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Full CRM attribution dashboard</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Dedicated account strategist</div>
+          <div class="pkg-feat-item"><span class="feat-check">✓</span> Quarterly competitive market review</div>
+        </div>
+        <div class="pkg-problem"><strong>Solves:</strong> Stagnant growth and DSO competition. Shifts focus from acquiring more patients to attracting the right patients and maximizing every patient's lifetime value.</div>
+      </div>
+
+    </div>
+
+    <div class="discount-banner">
+      <div class="disc-icon">🏷</div>
+      <div class="disc-text"><strong>Mix & match services and save.</strong> Combining three or more à la carte services qualifies for a 25% discount on the combined monthly total. Bundled packages already provide the best overall value — and all setup fees cover real onboarding work: campaign research, workflow builds, AI training, A2P compliance registration, and staff training.</div>
+    </div>
+
+    <div class="callout" style="margin-top:16px">
+      <strong>How our pricing compares:</strong> Full-service dental marketing agencies nationally charge $2,100–$10,000/month. Patient communication software (Weave, RevenueWell, Adit) runs $300–$800/month for tools your team must manage. DentalEdge Solutions delivers more — fully managed — starting at $697/month for the Efficiency Engine. The Patient Acquisition Engine at $1,497/month replaces $2,000–$3,000+/month in typical agency fees while adding automation and AI no other agency offers.
+    </div>
+
+    <div class="callout callout-coral" style="margin-top:12px">
+      <strong>SEO services available as add-ons to any package.</strong> Add the <strong>Local SEO Boost</strong> ($499/mo) for systematic rank tracking, Google Maps monitoring, and monthly reporting — or the full <strong>SEO / AEO / GEO Program</strong> ($799/mo) for data-driven content that gets your practice cited in Google AI Overviews, ChatGPT, and Perplexity. Both can be stacked with any tier above.
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 7: À LA CARTE -->
+<div class="page" id="section-05">
+  <div class="page-label"><span>05 — À La Carte Service Menu</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">05 — À La Carte Pricing</div>
+    <h2 class="sec-heading">Only need specific services?</h2>
+    <p class="sec-sub">Every service is available individually. Three or more services combined qualifies for a 25% discount on the total.</p>
+    <table class="ac-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th style="text-align:right">Monthly</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="ac-badge badge-ops">Operations</div>
+            <div class="ac-service-name">Automated Appointment Reminders</div>
+            <div class="ac-service-desc">Multi-channel SMS + email reminders — confirms 70%+ of appointments without staff calls.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$249</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-ops">Operations</div>
+            <div class="ac-service-name">No-Show & Cancellation Recovery</div>
+            <div class="ac-service-desc">Auto-triggers rebook sequence the moment a slot goes empty. Recovers ~$60K/year.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$99</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-ops">Operations</div>
+            <div class="ac-service-name">Missed Call Text-Back</div>
+            <div class="ac-service-desc">Instant SMS to any missed call before the patient dials a competitor.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$199</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-ops">Reputation</div>
+            <div class="ac-service-name">Automated Review Request System</div>
+            <div class="ac-service-desc">Post-visit review requests via SMS + email. Builds 20–50 new 5-star reviews per quarter.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$199</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-ai">AI-Powered</div>
+            <div class="ac-service-name">AI Review Responses (HIPAA-Safe)</div>
+            <div class="ac-service-desc">AI drafts compliant, professional responses to every review. Staff approves in one click.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$99</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-growth">Growth</div>
+            <div class="ac-service-name">Google Ads Management</div>
+            <div class="ac-service-desc">Data-driven campaigns connected directly to GHL CRM with 2-minute lead follow-up.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$499</div><div class="ac-price-note">+ ad spend</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-growth">Growth</div>
+            <div class="ac-service-name">Facebook / Instagram Ads Management</div>
+            <div class="ac-service-desc">Audience-targeted campaigns with automated follow-up for every lead generated.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$399</div><div class="ac-price-note">+ ad spend</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-ai">AI-Powered</div>
+            <div class="ac-service-name">Website AI Chat Bot</div>
+            <div class="ac-service-desc">24/7 AI chat widget on your website — answers common questions, qualifies visitors, and books appointments directly on your calendar, even when the office is closed.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$199</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-growth">Growth</div>
+            <div class="ac-service-name">Targeted High-Value Case Campaign</div>
+            <div class="ac-service-desc">Dedicated implant, Invisalign, or cosmetic funnel with automated nurture. Per campaign.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$499</div><div class="ac-price-note">+ $299 setup</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-ai">AI-Powered</div>
+            <div class="ac-service-name">AI Voice Agent (24/7 Inbound Calls)</div>
+            <div class="ac-service-desc">Intelligent AI receptionist answers every call, books appointments, and handles FAQ — day and night, including after hours and weekends.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$449</div><div class="ac-price-note">incl. 500 AI min/mo</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-ops">Retention</div>
+            <div class="ac-service-name">Automated Patient Recall & Reactivation</div>
+            <div class="ac-service-desc">Identifies overdue patients and sends a personalized rebook sequence automatically.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$249</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-new">New Service</div>
+            <div class="ac-service-name">Multilingual Patient Communication</div>
+            <div class="ac-service-desc">All workflows in Spanish, Haitian Creole, or Portuguese. Exclusively for SE Florida practices.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$149</div><div class="ac-price-note">add-on</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-new">New Service</div>
+            <div class="ac-service-name">Digital Intake Forms & Pre-Visit Paperwork</div>
+            <div class="ac-service-desc">Patients complete health history, consent, and insurance before arriving. 60-second check-in.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$99</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-new">New Service</div>
+            <div class="ac-service-name">Treatment Plan Follow-Up Automation</div>
+            <div class="ac-service-desc">Automated multi-touch sequence re-engages patients who received a treatment plan but never scheduled — converts your existing diagnosed backlog into booked production.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$149</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-growth">SEO Add-On</div>
+            <div class="ac-service-name">Local SEO Boost</div>
+            <div class="ac-service-desc">Keyword rank tracking, Google Maps position monitoring via local heatmaps, monthly on-page audit, and Google Business Profile optimization — delivered as a white-labeled monthly performance report. Builds measurable local search visibility without a full content program. Stackable with any package tier.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$499</div><div class="ac-price-note">per month</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ac-badge badge-growth">SEO Add-On</div>
+            <div class="ac-service-name">SEO / AEO / GEO Program</div>
+            <div class="ac-service-desc">The full organic visibility program — built on real data, not guesswork. Each month we research exactly what dental patients in your area are asking ChatGPT and Google AI, audit whether your practice appears in AI-generated answers, and analyze what your competitors are being cited for. From that data we produce 2 AEO-optimized content pages with FAQ schema markup targeting Google AI Overviews and AI citations. Includes GBP post management, keyword rank tracking, local heatmap monitoring, and a monthly report showing AI visibility progress alongside traditional rankings.</div>
+          </td>
+          <td style="text-align:right"><div class="ac-price">$799</div><div class="ac-price-note">per month</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PAGE 8: ROI -->
+<div class="page" id="section-06">
+  <div class="page-label"><span>06 — Your ROI</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">06 — Expected Return on Investment</div>
+    <h2 class="sec-heading">What to expect when the system is running.</h2>
+    <p class="sec-sub">These are conservative, achievable benchmarks based on real outcomes from dental practices using the same systems we deploy. Most clients see the first return within 30 days.</p>
+    <div class="roi-grid">
+      <div class="roi-card c1">
+        <div class="roi-what">No-show reduction</div>
+        <div class="roi-num">30–50%</div>
+        <div class="roi-label">Decrease in missed appointments within 30 days of reminder system launch</div>
+      </div>
+      <div class="roi-card c2">
+        <div class="roi-what">Annual revenue recovered</div>
+        <div class="roi-num">~$60K</div>
+        <div class="roi-label">Estimated production recovered via no-show & cancellation recovery automation</div>
+      </div>
+      <div class="roi-card c3">
+        <div class="roi-what">After-hours lead capture</div>
+        <div class="roi-num">80%+</div>
+        <div class="roi-label">Of missed and after-hours calls converted to active patient conversations</div>
+      </div>
+      <div class="roi-card c4">
+        <div class="roi-what">New 5-star reviews</div>
+        <div class="roi-num">20–50</div>
+        <div class="roi-label">New Google reviews generated per quarter via automated post-visit requests</div>
+      </div>
+      <div class="roi-card c5">
+        <div class="roi-what">New patient inquiries</div>
+        <div class="roi-num">15–40</div>
+        <div class="roi-label">Consistent monthly inquiries from Google & social media ads with CRM follow-up</div>
+      </div>
+      <div class="roi-card c6">
+        <div class="roi-what">Staff time saved</div>
+        <div class="roi-num">15–25 hrs</div>
+        <div class="roi-label">Per week saved by automating confirmations, follow-ups, and review responses</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="two-col" style="gap:40px;align-items:start">
+      <div>
+        <h3 style="margin-bottom:14px;color:var(--ink)">The math on one service alone</h3>
+        <p style="margin-bottom:12px">The <strong>Missed Call Text-Back</strong> is our simplest automation. Here's what it looks like for a typical SE Florida practice:</p>
+        <div style="background:var(--surface);border-radius:10px;padding:20px;border:1px solid var(--border)">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13.5px">
+            <span style="color:var(--ink-60)">Missed calls per day (avg)</span>
+            <strong>5–8 calls</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13.5px">
+            <span style="color:var(--ink-60)">New patient lifetime value</span>
+            <strong>$2,000–$5,000</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13.5px">
+            <span style="color:var(--ink-60)">Recovery rate with text-back</span>
+            <strong>30–40%</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0 0;font-size:14px">
+            <span style="color:var(--ink-60)">Monthly recovered patient value</span>
+            <span style="font-family:'Sora',sans-serif;font-weight:800;color:var(--purple);font-size:18px">$9,000–$32,000</span>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--ink-40);margin-top:8px">This one automation costs $199/month. At the low end of recovery, it returns 45× its cost.</p>
+      </div>
+      <div>
+        <h3 style="margin-bottom:14px;color:var(--ink)">High-value case math</h3>
+        <p style="margin-bottom:12px">One <strong>Targeted High-Value Case Campaign</strong> running for implants at $499/month:</p>
+        <div style="background:var(--surface);border-radius:10px;padding:20px;border:1px solid var(--border)">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13.5px">
+            <span style="color:var(--ink-60)">Average implant case revenue</span>
+            <strong>$3,500–$6,000</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13.5px">
+            <span style="color:var(--ink-60)">Target consultations per month</span>
+            <strong>3–8 consults</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13.5px">
+            <span style="color:var(--ink-60)">Case acceptance rate (warmed leads)</span>
+            <strong>40–60%</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0 0;font-size:14px">
+            <span style="color:var(--ink-60)">1 booked implant case = campaign covered for</span>
+            <span style="font-family:'Sora',sans-serif;font-weight:800;color:var(--purple);font-size:18px">9+ months</span>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--ink-40);margin-top:8px">In SE Florida's cosmetic and elective dentistry market, this ROI is highly achievable for practices with implant capacity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 9: WHO THIS IS FOR -->
+<div class="page" id="section-07">
+  <div class="page-label"><span>07 — Who This Is Built For</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">07 — Built for Every Role in the Practice</div>
+    <h2 class="sec-heading">Your entire team benefits.<br>Each in a different way.</h2>
+    <p class="sec-sub">Our system isn't a one-size-fits-all tool. The owner sees the revenue impact. The manager gets time back. The dentist gets a fuller, better schedule.</p>
+    <div class="roles-grid">
+      <div class="role-card">
+        <div class="role-header" style="background:var(--purple-deep)">
+          <div class="role-icon" style="background:rgba(255,255,255,0.15)">👤</div>
+          <div class="role-title">Practice Owner</div>
+          <div class="role-sub">Revenue, profitability & growth</div>
+        </div>
+        <div class="role-body">
+          <div class="role-headline">"Stop losing revenue to problems that can be automated away."</div>
+          <ul class="role-items">
+            <li><strong>No-Show & Cancellation Recovery</strong> stops you absorbing up to $200K/year in empty chair losses — automatically</li>
+            <li><strong>Automated Appointment Reminders</strong> confirm 70%+ of appointments with zero staff involvement</li>
+            <li><strong>Google & Social Ads</strong> connected to your CRM deliver predictable, attributable new patients every month</li>
+            <li><strong>AI Voice Agent</strong> gives you 24/7 call coverage — the same infrastructure DSOs spend millions to build, without the overhead</li>
+            <li><strong>Automated Patient Recall & Reactivation</strong> fills your hygiene schedule from your existing database — your highest-ROI channel</li>
+            <li><strong>CRM pipeline & attribution reporting</strong> shows every lead, every booking, and every campaign return in real time</li>
+          </ul>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-header" style="background:#1A4A7A">
+          <div class="role-icon" style="background:rgba(255,255,255,0.15)">📋</div>
+          <div class="role-title">Office Manager</div>
+          <div class="role-sub">Operations, efficiency & team</div>
+        </div>
+        <div class="role-body">
+          <div class="role-headline">"Give your front desk their time — and their sanity — back."</div>
+          <ul class="role-items">
+            <li><strong>Automated Appointment Reminders</strong> eliminate 3–4 hours/day of manual confirmation calls — no more phone tag</li>
+            <li><strong>Missed Call Text-Back</strong> fires instantly on every unanswered call — no patient goes unacknowledged</li>
+            <li><strong>No-Show & Cancellation Recovery</strong> sends the rebook message automatically — no uncomfortable follow-up calls to make</li>
+            <li><strong>Digital Intake Forms</strong> mean patients arrive with paperwork complete — check-in takes 60 seconds</li>
+            <li><strong>AI-Powered Review Responses</strong> draft a HIPAA-safe reply to every review — staff approves in one click</li>
+            <li><strong>Unified GHL inbox</strong> puts every patient SMS, email, and chat in one place — nothing falls through the cracks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-header" style="background:#1A5A3F">
+          <div class="role-icon" style="background:rgba(255,255,255,0.15)">🦷</div>
+          <div class="role-title">Dentist</div>
+          <div class="role-sub">Clinical quality & case volume</div>
+        </div>
+        <div class="role-body">
+          <div class="role-headline">"The right patients. The right cases. A schedule you designed."</div>
+          <ul class="role-items">
+            <li><strong>Targeted High-Value Case Campaigns</strong> bring implant, cosmetic & Invisalign patients directly to your calendar</li>
+            <li><strong>Treatment Plan Follow-Up Automation</strong> re-engages diagnosed patients who never scheduled — converting your existing backlog into booked production</li>
+            <li><strong>Website AI Chat Bot & AI Voice Agent</strong> handle after-hours inquiries so urgent cases are captured before they call a competitor</li>
+            <li><strong>Automated Review Request System</strong> ensures your clinical quality is reflected online after every single appointment — without anyone asking</li>
+            <li><strong>Patient Recall & Reactivation</strong> keeps your hygiene schedule full — the foundation that drives consistent restorative production</li>
+            <li><strong>SEO / AEO / GEO</strong> positions you as the cited authority for implants and cosmetics when patients ask AI tools for a recommendation in your area</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 10: IMPLEMENTATION ROADMAP -->
+<div class="page" id="section-08">
+  <div class="page-label"><span>08 — Implementation Roadmap</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">08 — Implementation Roadmap</div>
+    <h2 class="sec-heading">Your path from signed<br>to fully running.</h2>
+    <p class="sec-sub">Every practice starts somewhere different. Select the scenario that matches yours — then step through each phase to see exactly what happens, and when.</p>
+
+    <style>
+      .rm-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
+      .rm-tab{flex:1;padding:10px 12px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:var(--surface);color:var(--ink-60);transition:all .15s;font-family:'DM Sans',sans-serif;line-height:1.3;text-align:center}
+      .rm-tab:not(:last-child){border-right:1px solid var(--border)}
+      .rm-tab.rm-active{background:white;color:var(--ink);font-weight:600}
+      .rm-tab-sub{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-40);margin-bottom:2px}
+      .rm-tab.rm-active .rm-tab-sub{color:var(--purple-mid)}
+      .rm-intro-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:var(--ink-60);line-height:1.65}
+      .rm-intro-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+      .rm-phase-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px}
+      .rm-phase-tile{flex:1;min-width:80px;padding:8px 10px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--surface);text-align:center;transition:all .15s}
+      .rm-phase-tile:hover{background:white}
+      .rm-phase-tile.rm-phase-active{background:white;border-color:#ccc;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+      .rm-phase-dot{width:8px;height:8px;border-radius:50%;margin:0 auto 5px}
+      .rm-phase-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-40);margin-bottom:3px}
+      .rm-phase-name{font-size:11px;font-weight:500;color:var(--ink-60);line-height:1.3}
+      .rm-phase-tile.rm-phase-active .rm-phase-name{color:var(--ink)}
+      .rm-phase-tile.rm-phase-active .rm-phase-num{color:var(--ink-60)}
+      .rm-detail-box{border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+      .rm-detail-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+      .rm-detail-badge{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;padding:3px 10px;border-radius:20px;white-space:nowrap}
+      .rm-detail-heading{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--ink);flex:1}
+      .rm-detail-timing{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-40);white-space:nowrap}
+      .rm-detail-goal{font-size:13px;color:var(--ink-60);line-height:1.7;margin-bottom:14px;padding:10px 12px;background:var(--surface);border-radius:6px;border-left:3px solid var(--border)}
+      .rm-detail-tags{display:flex;flex-wrap:wrap;gap:6px}
+      .rm-detail-tag{font-size:11.5px;padding:4px 10px;border-radius:20px;background:var(--surface);color:var(--ink-60);border:1px solid var(--border)}
+      .rm-nav{display:flex;align-items:center;gap:8px}
+      .rm-nav-btn{padding:7px 16px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;border-radius:6px;border:1px solid var(--border);background:white;color:var(--ink-60)}
+      .rm-nav-btn:hover:not(:disabled){border-color:var(--purple-mid);color:var(--purple)}
+      .rm-nav-btn:disabled{opacity:.35;cursor:not-allowed}
+      .rm-nav-progress{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-40)}
+      .rm-nav-spacer{flex:1}
+    </style>
+
+    <div class="rm-tabs">
+      <button class="rm-tab rm-active" onclick="rmScenario(0,this)"><span class="rm-tab-sub">Scenario 01</span>New Practice</button>
+      <button class="rm-tab" onclick="rmScenario(1,this)"><span class="rm-tab-sub">Scenario 02</span>Established Practice</button>
+      <button class="rm-tab" onclick="rmScenario(2,this)"><span class="rm-tab-sub">Scenario 03</span>Migration / Switch</button>
+    </div>
+    <div id="rm-intro"></div>
+    <div id="rm-phases"></div>
+    <div id="rm-detail"></div>
+    <div id="rm-nav"></div>
+
+    <script>
+    (function(){
+      var rmSc=0, rmPh=[0,0,0];
+      var rmD=[
+        {
+          sc:"New Practice",sub:"Build it right from day one",
+          intro:"You have a blank slate and one chance to lay the right foundation. The order of operations matters: credibility first, then operational efficiency, then growth, then market dominance. Skipping phases leads to costly rebuilds.",
+          phases:[
+            {n:"01",name:"Digital Foundation & Setup",time:"Weeks 1–4",col:"#1A7A52",bg:"#E8F7F1",tc:"#0F6E56",
+             goal:"Before a single patient can find you, build the professional digital presence and working CRM that every other service depends on. A website without a CRM is a brochure. A CRM without a website has nothing to send traffic to.",
+             tags:["WordPress website built","GHL account configured","GBP optimized","70+ directory citations live","Online booking active","Staff trained & confident"]},
+            {n:"02",name:"Efficiency Engine",time:"Month 2",col:"#4B3AC9",bg:"#EEEDFE",tc:"#2D1F9E",
+             goal:"Your schedule is filling. Now eliminate every revenue leak before it becomes a habit. No-shows, missed calls, and an empty review profile are the three biggest early threats to a new practice — all solved in this phase.",
+             tags:["Appointment reminders live","Missed call text-back active","No-show recovery automated","Review requests running","AI review responses configured","A2P compliance registered"]},
+            {n:"03",name:"Patient Acquisition Engine",time:"Months 2–4",col:"#E8472A",bg:"#FFF1EE",tc:"#993C1D",
+             goal:"Leaks plugged, foundation solid. Open the acquisition valve — paid traffic that actually converts because every ad lead is connected to a CRM follow-up engine, not just a phone number.",
+             tags:["Google Ads launched","FB/IG Ads launched","Website AI chat bot live","Lead follow-up automated","CRM pipeline & attribution","Monthly performance report"]},
+            {n:"04",name:"Market Leader",time:"Months 4–12",col:"#7B6EE8",bg:"#EEEDFE",tc:"#534AB7",
+             goal:"Consistent patient flow, efficient operations. Add AI call coverage, high-value case funnels, recall automation, and SEO/AEO/GEO authority to become the dominant independent practice in your local market.",
+             tags:["AI Voice Agent live","High-value case campaigns","Patient recall & reactivation","Multilingual communications","SEO / AEO / GEO program","Quarterly strategy reviews"]}
+          ]
+        },
+        {
+          sc:"Established Practice",sub:"Fix the leaks first, then scale",
+          intro:"You have patients, a team, and existing workflows. The wrong move is adding marketing before fixing operational losses. This roadmap starts where the money is leaking — then builds the acquisition and retention systems that compound over time.",
+          phases:[
+            {n:"01",name:"Practice Audit",time:"Week 1",col:"#1A7A52",bg:"#E8F7F1",tc:"#0F6E56",
+             goal:"Quantify where revenue is leaking before spending a dollar on growth. A 60-minute discovery session and written audit report identifies your highest-ROI quick wins and the sequence in which to tackle them.",
+             tags:["No-show rate analyzed","Phone coverage audit","Review gap vs. competitors","Website performance review","Current tools inventory","Prioritized action plan delivered"]},
+            {n:"02",name:"Plug Revenue Leaks",time:"Weeks 2–4",col:"#4B3AC9",bg:"#EEEDFE",tc:"#2D1F9E",
+             goal:"The fastest-ROI phase in the entire program. Your patients already exist — you're just losing them to operational gaps. These automations typically pay for months of service within the first 30 days.",
+             tags:["Missed call text-back live Day 1","Reminders replace manual calls","No-show recovery automated","Review system running","All existing reviews responded to","Revenue leak report delivered"]},
+            {n:"03",name:"Growth Infrastructure",time:"Months 2–3",col:"#E8472A",bg:"#FFF1EE",tc:"#993C1D",
+             goal:"Revenue leaks plugged. Now evaluate your website, launch paid acquisition, and deploy the AI chat bot that captures the patients your site is already attracting but losing after hours.",
+             tags:["Website audited & upgraded","Google Ads launched","FB/IG Ads launched","AI chat bot deployed","Lead pipeline & attribution active","First booked ad patient"]},
+            {n:"04",name:"Scale & Dominate",time:"Months 3–6",col:"#7B6EE8",bg:"#EEEDFE",tc:"#534AB7",
+             goal:"Efficient operations and a running acquisition engine. Scale into high-value cases, automate patient retention, and build the market presence that makes DSO competition irrelevant.",
+             tags:["AI Voice Agent deployed","High-value case campaigns","Patient recall & reactivation","30-day performance review","Quarterly competitive analysis"]},
+            {n:"05",name:"Long-Term Growth",time:"Months 6–12+",col:"#C9962A",bg:"#FFF8E8",tc:"#854F0B",
+             goal:"Compounding value: SEO authority that builds month over month, multilingual reach across SE Florida's patient base, and treatment plan automation that converts your diagnosed backlog into booked production.",
+             tags:["SEO / AEO / GEO program","Multilingual comms active","Treatment plan follow-up","Monthly ROI reporting","Ongoing platform optimization"]}
+          ]
+        },
+        {
+          sc:"Migration / Switch",sub:"Switch without losing a patient or a day",
+          intro:"You're already using tools — maybe Weave, RevenueWell, Adit, or a mix of disconnected platforms. Migration done right is invisible to your team and your patients. Done wrong, it creates gaps that cost you leads and trust.",
+          phases:[
+            {n:"01",name:"Migration Audit",time:"Week 1",col:"#1A7A52",bg:"#E8F7F1",tc:"#0F6E56",
+             goal:"Before touching anything, map every tool, workflow, and piece of data that needs to move. A migration without a complete inventory has blind spots — and blind spots in patient communication cost you patients.",
+             tags:["Full tool & workflow inventory","Contract end dates mapped","Patient data exported & backed up","HIPAA / BAA configured","Migration master plan confirmed"]},
+            {n:"02",name:"Parallel Build",time:"Weeks 2–3",col:"#4B3AC9",bg:"#EEEDFE",tc:"#2D1F9E",
+             goal:"Build and test the entire DES system while your existing tools keep running. Nothing touches patients until every workflow has passed an end-to-end test. Parallel running is the safety net that makes zero-disruption migration possible.",
+             tags:["GHL account fully built","All workflows rebuilt & tested","Patient database imported","Staff trained on new platform","Full test run completed & signed off"]},
+            {n:"03",name:"Controlled Cutover",time:"Week 4",col:"#E8472A",bg:"#FFF1EE",tc:"#993C1D",
+             goal:"Sunset existing tools one by one — lowest-dependency first, highest-dependency last. No tool is cancelled until its GHL replacement has been live and stable for a minimum of 72 hours.",
+             tags:["Automations live (Monday AM)","72-hour stability check","Website launched (if applicable)","Old tools cancelled in sequence","Net monthly savings confirmed"]},
+            {n:"04",name:"Optimization & Growth",time:"Month 2 onward",col:"#7B6EE8",bg:"#EEEDFE",tc:"#534AB7",
+             goal:"Fully on GHL, old tools gone. A 30-day review measures what changed, corrects any gaps, then activates the new capabilities that weren't possible on your previous platform.",
+             tags:["30-day post-migration review","New capabilities activated","Monthly performance reporting live","Growth programs launched","Ongoing platform management"]}
+          ]
+        }
+      ];
+
+      function rmRender(){
+        var d=rmD[rmSc], ph=rmPh[rmSc], p=d.phases[ph];
+
+        // Intro
+        document.getElementById('rm-intro').innerHTML=
+          '<div class="rm-intro-box"><div class="rm-intro-name">'+d.sc+' &mdash; '+d.sub+'</div>'+d.intro+'</div>';
+
+        // Phase tiles
+        var tiles='<div class="rm-phase-row">';
+        for(var i=0;i<d.phases.length;i++){
+          var pp=d.phases[i];
+          tiles+='<div class="rm-phase-tile'+(i===ph?' rm-phase-active':'')+'" onclick="rmPhase('+i+')">'
+            +'<div class="rm-phase-dot" style="background:'+pp.col+'"></div>'
+            +'<div class="rm-phase-num">'+pp.n+'</div>'
+            +'<div class="rm-phase-name">'+pp.name+'</div>'
+            +'</div>';
+        }
+        tiles+='</div>';
+        document.getElementById('rm-phases').innerHTML=tiles;
+
+        // Detail
+        var tags='';
+        for(var t=0;t<p.tags.length;t++) tags+='<span class="rm-detail-tag">'+p.tags[t]+'</span>';
+        document.getElementById('rm-detail').innerHTML=
+          '<div class="rm-detail-box">'
+          +'<div class="rm-detail-top">'
+          +'<span class="rm-detail-badge" style="background:'+p.bg+';color:'+p.tc+'">Phase '+p.n+'</span>'
+          +'<span class="rm-detail-heading">'+p.name+'</span>'
+          +'<span class="rm-detail-timing">'+p.time+'</span>'
+          +'</div>'
+          +'<div class="rm-detail-goal">'+p.goal+'</div>'
+          +'<div class="rm-detail-tags">'+tags+'</div>'
+          +'</div>';
+
+        // Nav
+        document.getElementById('rm-nav').innerHTML=
+          '<div class="rm-nav">'
+          +'<button class="rm-nav-btn" onclick="rmPhase('+(ph-1)+')" '+(ph===0?'disabled':'')+'>&#8592; Previous</button>'
+          +'<span class="rm-nav-progress">'+( ph+1)+' / '+d.phases.length+'</span>'
+          +'<span class="rm-nav-spacer"></span>'
+          +'<button class="rm-nav-btn" onclick="rmPhase('+(ph+1)+')" '+(ph===d.phases.length-1?'disabled':'')+'>Next &#8594;</button>'
+          +'</div>';
+      }
+
+      window.rmScenario=function(idx,btn){
+        rmSc=idx;
+        document.querySelectorAll('.rm-tab').forEach(function(b){b.classList.remove('rm-active')});
+        btn.classList.add('rm-active');
+        rmRender();
+      };
+      window.rmPhase=function(idx){
+        var max=rmD[rmSc].phases.length;
+        if(idx<0||idx>=max) return;
+        rmPh[rmSc]=idx;
+        rmRender();
+      };
+
+      document.addEventListener('DOMContentLoaded', rmRender);
+      if(document.readyState!=='loading') rmRender();
+    })();
+    </script>
+
+  </div>
+  </div>
+</div>
+
+<!-- PAGE 11: OBJECTIONS -->
+<div class="page" id="section-09">
+  <div class="page-label"><span>09 — Common Questions</span><span>DentalEdge Solutions — The Practice Growth Engine</span></div>
+  <div class="section-inner">
+    <div class="sec-eyebrow">09 — Common Questions</div>
+    <h2 class="sec-heading">Questions we hear — and the honest answers.</h2>
+    <p class="sec-sub">We'd rather answer the hard questions in this proposal than leave them for after you sign.</p>
+    <div class="objection-list">
+      <div class="obj-item">
+        <div class="obj-q">We've tried marketing agencies before and wasted money. Why is this different?</div>
+        <div class="obj-a">Most agencies deliver activity — ads, posts, a website — and disappear. We deliver a system that connects every channel to your CRM, tracks every lead through to a booked appointment, and shows you the ROI in real numbers. You don't pay us to run ads. You pay us to produce booked patients — and our reporting makes that visible every month.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">We already use [Weave / RevenueWell / Adit]. Why would we switch?</div>
+        <div class="obj-a">Those are good tools that require your team to manage them. We take that burden completely off your plate and add capabilities those platforms don't have — high-value case funnels, AI voice agents, HIPAA-compliant AI review responses, multilingual communications, and ads management — all integrated in one system. Many of our clients replaced 3–4 separate subscriptions with DES and reduced their total monthly software spend while getting more capability.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">What happens to our patient data? Is this HIPAA compliant?</div>
+        <div class="obj-a">Our system runs on GoHighLevel, configured under a Business Associate Agreement at the agency level. All patient communications are built with HIPAA guardrails — no clinical details in SMS, no PHI in email subject lines, and AI review responses are configured to never reference treatment or appointment-specific information. We brief your team on data handling obligations and maintain those standards across every workflow we build.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">We use Dentrix / Eaglesoft. Will your system integrate with it?</div>
+        <div class="obj-a">GoHighLevel does not natively write back to dental practice management software (PMS). For appointments booked through our system — from ads, the website, the AI chatbot, or the voice agent — those are managed in our platform. Your PMS remains your clinical record system. Many practices run both in parallel. Where a bridge is needed, we identify a Zapier or manual workflow solution to keep everything in sync without disruption to your existing clinical operations.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">How long until we see results?</div>
+        <div class="obj-a">The fastest ROI services go live in 24–48 hours — missed call text-back and appointment reminders typically produce measurable results within the first week. Review growth is visible within 30 days. Ad campaigns typically produce their first booked patients within 2 weeks of launch. Most clients see a clear, positive return on their DES investment before the first month is over.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">What if we want to cancel?</div>
+        <div class="obj-a">Our packages are month-to-month after the initial setup period. We don't lock practices into long-term contracts because we'd rather earn your business every month than trap you in it. Setup fees cover the genuine onboarding work — website builds, workflow configuration, AI training, campaign research, A2P compliance registration, and staff training. That work has real labor cost regardless of how long you stay.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 12: NEXT STEPS / CTA -->
+<div class="page" id="section-10">
+  <div class="cta-section">
+    <div class="cta-eyebrow">10 — Next Steps</div>
+    <div class="cta-heading">Ready to build your<br>Practice Growth Engine?</div>
+    <div class="cta-sub">Start with a free 30-minute Practice Growth Audit. We'll identify exactly where your practice is losing revenue and which services will produce the fastest ROI for your specific situation.</div>
+    <div class="cta-buttons">
+      <a class="btn btn-coral btn-big" href="https://dentaledgesolutions.com" target="_blank">Book My Free Practice Audit →</a>
+      <a class="btn btn-outline btn-big" href="https://dentaledgesolutions.com" target="_blank">View Our Full Service Menu</a>
+    </div>
+    <div class="cta-contact">
+      <div class="cta-contact-item">🌐 <strong>dentaledgesolutions.com</strong></div>
+      <div class="cta-contact-item">📱 <strong>@dentaledge.solutions</strong></div>
+      <div class="cta-contact-item">📍 Serving <strong>Miami-Dade · Broward · Palm Beach</strong></div>
+    </div>
+  </div>
+  <div class="proposal-footer">
+    <div class="footer-brand">Dental<span>Edge</span> Solutions</div>
+    <div class="footer-links">
+      <a class="footer-link" href="#">dentaledgesolutions.com</a>
+      <a class="footer-link" href="#">Privacy Policy</a>
+      <a class="footer-link" href="#">© 2025 DentalEdge Solutions. All rights reserved.</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('proposal-date').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  function syncName(val) {
+    document.title = val ? `${val} — Practice Growth Engine Proposal` : 'The Practice Growth Engine — DentalEdge Solutions';
+  }
+
+  function downloadProposal() {
+    var pInput = document.getElementById('practice-name');
+    var oInput = document.getElementById('owner-name');
+    var practiceName = pInput.value.trim();
+    var ownerName    = oInput.value.trim();
+
+    // Bake current values into HTML attributes so outerHTML captures them
+    pInput.setAttribute('value', practiceName);
+    oInput.setAttribute('value', ownerName);
+
+    // Hide toolbar — client receives a clean file with no builder controls
+    var toolbar = document.querySelector('.toolbar');
+    toolbar.style.display = 'none';
+
+    // Capture full document HTML
+    var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+    // Restore toolbar
+    toolbar.style.display = '';
+
+    // Build safe filename from practice name
+    var safe = (practiceName || 'DentalEdge')
+      .replace(/[^a-zA-Z0-9\s\-\_\.]/g, '')
+      .trim()
+      .replace(/\s+/g, '_');
+    var filename = safe + '_Proposal.html';
+
+    // Trigger download
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href     = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 200);
+  }
+
+</script>
+
+</body>
+</html>

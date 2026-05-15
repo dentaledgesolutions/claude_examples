@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Companioni Dental Smile — 90-Day Growth Scenario | DentalEdge Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #4B3AC9; --purple-dark: #2D1F9E; --purple-deep: #1A1063;
+    --purple-light: #EEEcFF; --purple-mid: #7B6EE8;
+    --coral: #E8472A; --coral-light: #FFF1EE;
+    --ink: #0F0D1A; --ink-60: #4A4660; --ink-40: #8C89A0;
+    --surface: #F7F6FB; --border: #E4E1F5; --white: #FFFFFF;
+    --gold: #C9962A; --gold-light: #FFF8E8;
+    --green: #1A7A52; --green-light: #E8F7F1; --green-mid: #2A9E6A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--ink); background: #F0EFF8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @media print { body { background: white; font-size: 13px; } .card { page-break-inside: avoid; } @page { margin: 0.75in; size: letter; } }
+  h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.15; }
+  p { line-height: 1.7; color: var(--ink-60); }
+  strong { color: var(--ink); font-weight: 600; }
+
+  .page-wrapper { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .scenario-banner { background: var(--gold-light); border: 1px solid #E8C96A; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--ink-60); }
+  .scenario-banner strong { color: var(--gold); }
+
+  .hero { background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-dark) 60%, #3D2FB5 100%); border-radius: 16px; padding: 64px 56px 56px; color: white; margin-bottom: 32px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 24px; }
+  .hero h1 { font-size: 38px; font-weight: 800; color: white; line-height: 1.1; margin-bottom: 16px; max-width: 640px; position: relative; z-index: 1; }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 48px; position: relative; z-index: 1; }
+  .hero-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 12px; overflow: hidden; position: relative; z-index: 1; }
+  .hero-metric { background: rgba(255,255,255,0.08); padding: 24px 20px; text-align: center; }
+  .hero-metric:first-child { border-radius: 12px 0 0 12px; }
+  .hero-metric:last-child { border-radius: 0 12px 12px 0; }
+  .metric-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .metric-before { font-family: 'Sora', sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+  .metric-after { font-family: 'Sora', sans-serif; font-size: 32px; font-weight: 800; color: white; margin-bottom: 4px; }
+  .metric-delta { display: inline-block; background: var(--green-mid); color: white; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+
+  .card { background: white; border-radius: 16px; padding: 48px 52px; margin-bottom: 24px; border: 1px solid var(--border); }
+  .card-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 12px; }
+  .card h2 { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
+  .card h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+
+  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .profile-item { background: var(--surface); border-radius: 10px; padding: 16px 20px; }
+  .profile-item-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-40); margin-bottom: 4px; }
+  .profile-item-value { font-size: 15px; font-weight: 600; color: var(--ink); }
+
+  .challenge-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .challenge-list li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; background: var(--coral-light); border-left: 3px solid var(--coral); border-radius: 0 8px 8px 0; }
+  .challenge-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .challenge-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+  .challenge-text span { font-size: 13px; color: var(--ink-60); }
+
+  .phases { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
+  .phase { display: flex; gap: 20px; align-items: flex-start; }
+  .phase-number { width: 40px; height: 40px; border-radius: 50%; background: var(--purple-light); color: var(--purple); font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .phase-content h3 { font-size: 16px; margin-bottom: 6px; }
+  .phase-content p { font-size: 14px; }
+  .phase-tag { display: inline-block; background: var(--purple-light); color: var(--purple); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; margin-bottom: 8px; letter-spacing: 0.05em; }
+
+  .timeline { position: relative; margin-top: 32px; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 32px; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot { position: absolute; left: -28px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--purple); border: 3px solid white; box-shadow: 0 0 0 2px var(--purple); }
+  .timeline-month { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
+  .timeline-item h3 { font-size: 16px; margin-bottom: 8px; }
+  .timeline-wins { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .win-chip { background: var(--green-light); color: var(--green); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px; }
+
+  .results-table { width: 100%; border-collapse: collapse; margin-top: 32px; font-size: 14px; }
+  .results-table th { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-40); padding: 10px 16px; text-align: left; border-bottom: 2px solid var(--border); }
+  .results-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--ink-60); vertical-align: middle; }
+  .results-table tr:last-child td { border-bottom: none; }
+  .results-table .metric-name { font-weight: 600; color: var(--ink); }
+  .val-before { color: var(--ink-40); }
+  .val-after { font-weight: 700; color: var(--green); font-size: 15px; }
+  .val-delta { display: inline-flex; align-items: center; gap: 4px; background: var(--green-light); color: var(--green); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+
+  .wins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  .win-card { background: var(--green-light); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .win-card-icon { font-size: 28px; margin-bottom: 12px; }
+  .win-card-number { font-family: 'Sora', sans-serif; font-size: 30px; font-weight: 800; color: var(--green); margin-bottom: 4px; line-height: 1; }
+  .win-card-label { font-size: 13px; color: var(--ink-60); line-height: 1.4; }
+
+  .quote-card { background: var(--purple-deep); border-radius: 16px; padding: 48px 52px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .quote-card::before { content: '\201C'; position: absolute; top: -20px; left: 40px; font-family: 'Sora', sans-serif; font-size: 180px; color: rgba(255,255,255,0.06); line-height: 1; pointer-events: none; }
+  .quote-text { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 500; color: white; line-height: 1.5; margin-bottom: 28px; position: relative; z-index: 1; font-style: italic; }
+  .quote-attribution { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
+  .quote-avatar { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+  .quote-name { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; color: white; }
+  .quote-title { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+  .cta-card { background: linear-gradient(135deg, var(--coral) 0%, #C93520 100%); border-radius: 16px; padding: 56px 52px; text-align: center; color: white; margin-bottom: 24px; }
+  .cta-card h2 { font-size: 32px; font-weight: 800; color: white; margin-bottom: 14px; }
+  .cta-card p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-btn { display: inline-block; background: white; color: var(--coral); font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 8px; text-decoration: none; }
+  .cta-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 14px; }
+  .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--ink-40); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 28px 36px; } .hero h1 { font-size: 28px; }
+    .hero-metrics { grid-template-columns: 1fr; } .card { padding: 32px 24px; }
+    .profile-grid, .wins-grid { grid-template-columns: 1fr; }
+    .quote-card, .cta-card { padding: 36px 28px; } .quote-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <div class="scenario-banner">
+    <span>⚠️</span>
+    <div><strong>Scenario Study:</strong> This document shows a projected 90-day outcome based on DentalEdge Solutions' typical results for practices in this situation. Actual results from this engagement will replace these projections as data is collected.</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">90-Day Scenario · The #1 Worth Defending</div>
+    <h1>How Companioni Dental Smile Stayed #1 in Coral Gables — and Grew Untouchable</h1>
+    <p class="hero-sub">Coral Gables, FL · General &amp; Cosmetic Dentistry · Affluent, Competitive Market</p>
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <div class="metric-label">Google Maps Rank</div>
+        <div class="metric-before">Was: #1 (at risk)</div>
+        <div class="metric-after">#1</div>
+        <div class="metric-delta">Defended &amp; widened gap</div>
+      </div>
+      <div class="hero-metric">
+        <div class="metric-label">Google Reviews</div>
+        <div class="metric-before">Was: 115</div>
+        <div class="metric-after">200+</div>
+        <div class="metric-delta">+85 new reviews</div>
+      </div>
+      <div class="hero-metric">
+        <div class="metric-label">High-Value Case Leads</div>
+        <div class="metric-before">Was: ~4/mo est.</div>
+        <div class="metric-after">12+/mo</div>
+        <div class="metric-delta">+3x cosmetic pipeline</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Practice</div>
+    <h2>Meet Companioni Dental Smile</h2>
+    <p>Companioni Dental Smile is a premier general and cosmetic dentistry practice in the heart of Coral Gables. With a 4.9-star rating and a loyal patient base drawn from the area's affluent professional community, they earned the #1 Google Maps position in a fiercely competitive market. The risk: nine hungry competitors are closing in — and the review gap is narrowing.</p>
+    <div class="profile-grid">
+      <div class="profile-item"><div class="profile-item-label">Location</div><div class="profile-item-value">Coral Gables, FL</div></div>
+      <div class="profile-item"><div class="profile-item-label">Specialty</div><div class="profile-item-value">General &amp; Cosmetic Dentistry</div></div>
+      <div class="profile-item"><div class="profile-item-label">Google Rating</div><div class="profile-item-value">4.9 ⭐ (115 reviews)</div></div>
+      <div class="profile-item"><div class="profile-item-label">Market</div><div class="profile-item-value">Affluent, high-competition Coral Gables</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Challenge</div>
+    <h2>First Place — With a Shrinking Lead</h2>
+    <p>Companioni Dental Smile earned their #1 ranking through excellent clinical care and genuine patient relationships. But in Coral Gables, that's not enough to stay there. The practice behind them has 447 reviews. The one behind that has 384. With only 115 reviews, one bad quarter could knock them off the top spot.</p>
+    <ul class="challenge-list">
+      <li>
+        <div class="challenge-icon">⚠️</div>
+        <div class="challenge-text">
+          <strong>Dangerously thin review count for a #1 ranking</strong>
+          <span>Closest competitors average 380+ reviews. Companioni's 115 means their #1 position is algorithm-vulnerable — one competitor surge could flip it overnight.</span>
+        </div>
+      </li>
+      <li>
+        <div class="challenge-icon">💎</div>
+        <div class="challenge-text">
+          <strong>No visibility for high-value cosmetic keywords</strong>
+          <span>Searches like "cosmetic dentist Coral Gables," "veneers Coral Gables," and "smile makeover Coral Gables" return competitors — not Companioni, despite their cosmetic expertise.</span>
+        </div>
+      </li>
+      <li>
+        <div class="challenge-icon">📱</div>
+        <div class="challenge-text">
+          <strong>New patient pipeline is entirely word-of-mouth dependent</strong>
+          <span>No automated follow-up, no digital referral system, no lead nurture. Exceptional care brings referrals, but there's no system to accelerate or capture them consistently.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The DentalEdge Growth System</div>
+    <h2>Three Phases. One Goal: Untouchable.</h2>
+    <p>For practices already at #1, the goal isn't visibility — it's moat-building. We protect the ranking, triple review velocity, and open high-value service verticals that competitors can't easily replicate.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-number">1</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 1–30 · Foundation</div>
+          <h3>Review Velocity Program &amp; GBP Fortification</h3>
+          <p>Automated post-visit review request via SMS and email — targeting 20+ new reviews per month. GBP expanded with cosmetic service categories, before/after photo gallery, and FAQ seeding for veneers, Invisalign, and teeth whitening terms.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">2</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 31–60 · Momentum</div>
+          <h3>Cosmetic Keyword Expansion &amp; High-Intent Landing Pages</h3>
+          <p>Dedicated landing pages for veneers, smile makeovers, and teeth whitening in Coral Gables — with schema markup and local signals. GHL nurture sequences activated for cosmetic consultation inquiries, with 3-touch follow-up over 7 days.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">3</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 61–90 · Scale</div>
+          <h3>Referral Loop &amp; Professional Network Activation</h3>
+          <p>Systematic referral program launched to existing patient base. Outreach to Coral Gables area physicians, specialists, and HR departments for employee dental benefit partnerships. Review moat now insurmountable: 200+ reviews with 4.9★ average.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Results</div>
+    <h2>What Changes — Month by Month</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 1 — Days 1–30</div>
+        <h3>Review Velocity Surges — Gap Starts Closing</h3>
+        <p>With automated SMS review requests live, new reviews jump from ~3/month to 25+. GBP now shows cosmetic service categories, attracting high-intent searchers previously captured by competitors.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">+28 new reviews</span>
+          <span class="win-chip">Cosmetic categories added</span>
+          <span class="win-chip">4.9★ maintained</span>
+          <span class="win-chip">SMS system live</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 2 — Days 31–60</div>
+        <h3>Cosmetic Keywords Begin Ranking — High-Value Leads Arrive</h3>
+        <p>Veneer and smile makeover pages begin appearing in top 5 searches. First cosmetic consultation leads tracked through the GHL pipeline. #1 ranking holding with growing buffer over nearest competitor.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">+30 new reviews</span>
+          <span class="win-chip">Top 5 for "cosmetic dentist Coral Gables"</span>
+          <span class="win-chip">+4 cosmetic consults/mo</span>
+          <span class="win-chip">#1 rank defended</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 3 — Days 61–90</div>
+        <h3>200+ Reviews — Position Is Untouchable</h3>
+        <p>Review count passes 200, creating a moat that competitors cannot close in a quarter. Referral program generates additional high-value cases. Cosmetic pipeline producing consistent $8K+ treatment plans monthly.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">200+ total reviews</span>
+          <span class="win-chip">+27 new reviews this month</span>
+          <span class="win-chip">Referral program live</span>
+          <span class="win-chip">+8 cosmetic cases/mo</span>
+        </div>
+      </div>
+    </div>
+
+    <table class="results-table">
+      <thead>
+        <tr><th>Metric</th><th>Before</th><th>After 90 Days</th><th>Change</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="metric-name">Google Maps Rank ("dentist Coral Gables FL")</td><td class="val-before">#1 (vulnerable)</td><td class="val-after">#1 (secure)</td><td><span class="val-delta">Defended</span></td></tr>
+        <tr><td class="metric-name">Google Reviews</td><td class="val-before">115</td><td class="val-after">200+</td><td><span class="val-delta">+85 reviews</span></td></tr>
+        <tr><td class="metric-name">Review Velocity</td><td class="val-before">~3 / month</td><td class="val-after">27 / month</td><td><span class="val-delta">+800%</span></td></tr>
+        <tr><td class="metric-name">Cosmetic Consultation Leads / Month</td><td class="val-before">~4 est.</td><td class="val-after">12+</td><td><span class="val-delta">+200%</span></td></tr>
+        <tr><td class="metric-name">Cosmetic Keyword Rankings</td><td class="val-before">0 top-10 positions</td><td class="val-after">4 top-5 positions</td><td><span class="val-delta">New revenue channel</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">By the Numbers</div>
+    <h2>Three Wins That Cement the Lead</h2>
+    <div class="wins-grid">
+      <div class="win-card">
+        <div class="win-card-icon">🥇</div>
+        <div class="win-card-number">#1</div>
+        <div class="win-card-label">Google Maps rank — held and fortified with a 200+ review moat</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-icon">⭐</div>
+        <div class="win-card-number">+85</div>
+        <div class="win-card-label">New Google reviews in 90 days — from 115 to 200+, 4.9★ average held</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-icon">💎</div>
+        <div class="win-card-number">3x</div>
+        <div class="win-card-label">Cosmetic consultation pipeline — veneers, smile makeovers, whitening</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <div class="quote-text">
+      "We knew we were #1 — but we also knew we were one bad month away from losing it. Now I don't worry about that. Our review count keeps climbing and we're getting calls for cases we never used to see."
+    </div>
+    <div class="quote-attribution">
+      <div class="quote-avatar">C</div>
+      <div>
+        <div class="quote-name">Dr. [Name], DMD</div>
+        <div class="quote-title">Lead Dentist · Companioni Dental Smile, Coral Gables FL</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-card">
+    <h2>Is Your Practice Next?</h2>
+    <p>We take on a limited number of South Florida practices each quarter. Request your free Practice Audit and get a personalized growth plan within 48 hours.</p>
+    <a href="#" class="cta-btn">Get Your Free Practice Audit</a>
+    <div class="cta-sub">No contracts · No setup fees · Results in 90 days</div>
+  </div>
+
+  <div class="footer">
+    &copy; 2026 DentalEdge Solutions · South Florida's Dental Growth Specialists<br>
+    <a href="https://dentaledgesolutions.com" style="color: var(--ink-40); text-decoration: none;">dentaledgesolutions.com</a>
+  </div>
+</div>
+</body>
+</html>

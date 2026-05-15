@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentalEdge — Proposal Test Runner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f12;
+    --surface: #141619;
+    --surface2: #1c1f23;
+    --surface3: #22262b;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8eaed;
+    --text2: #8b9099;
+    --text3: #555c66;
+    --accent: #4f8ef7;
+    --accent-dim: rgba(79,142,247,0.12);
+    --green: #3ecf8e;
+    --green-dim: rgba(62,207,142,0.1);
+    --red: #f76f6f;
+    --red-dim: rgba(247,111,111,0.1);
+    --amber: #f5a623;
+    --amber-dim: rgba(245,166,35,0.1);
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-header {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .logo { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; margin-bottom: 4px; }
+  .sidebar-title { font-size: 15px; font-weight: 600; color: var(--text); }
+
+  .section-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text3);
+    padding: 0 20px; margin: 16px 0 8px;
+  }
+
+  .test-btn {
+    display: block; width: 100%; text-align: left;
+    padding: 10px 20px; border: none; background: none;
+    color: var(--text2); font-family: var(--sans); font-size: 13px;
+    cursor: pointer; transition: all 0.15s; border-left: 2px solid transparent;
+  }
+  .test-btn:hover { background: var(--surface2); color: var(--text); }
+  .test-btn.active { background: var(--accent-dim); color: var(--accent); border-left-color: var(--accent); }
+  .test-btn .test-label { font-weight: 500; display: block; }
+  .test-btn .test-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+  .test-btn.active .test-sub { color: rgba(79,142,247,0.6); }
+
+  .nav-items { margin-top: auto; padding: 16px 0 0; border-top: 1px solid var(--border); }
+  .nav-item {
+    display: block; width: 100%; text-align: left;
+    padding: 8px 20px; border: none; background: none;
+    color: var(--text3); font-family: var(--sans); font-size: 12px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .nav-item:hover { color: var(--text); }
+  .nav-item.active { color: var(--accent); }
+
+  /* Main */
+  .main { display: flex; flex-direction: column; overflow: hidden; }
+
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .test-indicator {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text2);
+  }
+  .test-indicator .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text3); flex-shrink: 0;
+  }
+  .test-indicator.running .dot { background: var(--amber); animation: pulse 1s infinite; }
+  .test-indicator.success .dot { background: var(--green); }
+  .test-indicator.error .dot { background: var(--red); }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .run-btn {
+    padding: 8px 20px; border-radius: 6px;
+    background: var(--accent); color: #fff;
+    border: none; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; transition: all 0.15s;
+  }
+  .run-btn:hover { background: #6ba0f9; }
+  .run-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .content { flex: 1; overflow-y: auto; padding: 28px; }
+
+  /* Input panel */
+  .input-panel { margin-bottom: 28px; }
+  .panel-title {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text3); margin-bottom: 12px;
+  }
+  .json-display {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    font-family: var(--mono); font-size: 12px; color: var(--text2);
+    white-space: pre; overflow-x: auto; line-height: 1.7;
+    max-height: 220px; overflow-y: auto;
+  }
+
+  /* Section tabs */
+  .section-tabs {
+    display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .stab {
+    padding: 5px 12px; border-radius: 4px;
+    border: 1px solid var(--border); background: none;
+    color: var(--text3); font-family: var(--sans); font-size: 12px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .stab:hover { border-color: var(--border2); color: var(--text2); }
+  .stab.active { background: var(--surface2); color: var(--text); border-color: var(--border2); }
+
+  /* Cards */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; margin-bottom: 12px;
+  }
+  .card-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+  .field-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
+  .field-value { font-size: 14px; color: var(--text); line-height: 1.6; }
+  .field-value.headline { font-size: 20px; font-weight: 600; line-height: 1.3; }
+  .field-value.sub { font-size: 15px; color: var(--text2); }
+
+  .pain-card {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px; margin-bottom: 10px;
+  }
+  .pain-title { font-weight: 500; font-size: 14px; margin-bottom: 6px; color: var(--text); }
+  .pain-body { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 10px; }
+  .impact-tag {
+    display: inline-block; padding: 3px 10px;
+    background: var(--red-dim); color: var(--red);
+    border-radius: 4px; font-size: 12px; font-family: var(--mono); font-weight: 500;
+  }
+
+  .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .roi-cell { background: var(--surface2); border-radius: 6px; padding: 12px; }
+  .roi-cell-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .roi-cell-val { font-size: 14px; font-weight: 500; font-family: var(--mono); }
+  .roi-cell-val.loss { color: var(--red); }
+  .roi-cell-val.gain { color: var(--green); }
+  .roi-note { font-size: 12px; color: var(--text3); margin-top: 6px; }
+
+  .advantage {
+    border-left: 2px solid var(--border2); padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+  .advantage-title { font-weight: 500; font-size: 13px; margin-bottom: 4px; color: var(--accent); }
+  .advantage-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  .callout-box {
+    background: var(--accent-dim); border: 1px solid rgba(79,142,247,0.2);
+    border-radius: 8px; padding: 16px;
+    font-size: 13px; color: var(--text2); line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .faq-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-weight: 500; font-size: 14px; color: var(--text); margin-bottom: 6px; }
+  .faq-a { font-size: 13px; color: var(--text2); line-height: 1.65; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .meta-cell { background: var(--surface2); border-radius: 6px; padding: 12px; }
+  .meta-key { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+  .meta-val { font-size: 13px; color: var(--text); font-family: var(--mono); }
+
+  .cta-bar {
+    background: linear-gradient(135deg, var(--accent-dim), var(--surface2));
+    border: 1px solid rgba(79,142,247,0.2);
+    border-radius: 8px; padding: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cta-btn {
+    padding: 10px 22px; background: var(--accent);
+    color: #fff; border: none; border-radius: 6px;
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .summary-box {
+    background: var(--green-dim); border: 1px solid rgba(62,207,142,0.15);
+    border-radius: 8px; padding: 16px;
+    font-size: 13px; color: var(--text2); line-height: 1.7; margin-top: 12px;
+  }
+
+  .raw-toggle { font-size: 12px; color: var(--text3); cursor: pointer; background: none; border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px; font-family: var(--sans); }
+  .raw-toggle:hover { color: var(--text2); }
+  .raw-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-family: var(--mono); font-size: 11px; color: var(--text3); white-space: pre-wrap; word-break: break-all; max-height: 500px; overflow-y: auto; margin-top: 10px; }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text3); }
+  .empty-state p { font-size: 14px; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">DentalEdge Solutions</div>
+      <div class="sidebar-title">Proposal Test Runner</div>
+    </div>
+
+    <div class="section-label">Test cases</div>
+    <button class="test-btn active" onclick="selectTest(0)">
+      <span class="test-label">Test 1 — Weave</span>
+      <span class="test-sub">Carlos Mendez · Miami-Dade · New patients</span>
+    </button>
+    <button class="test-btn" onclick="selectTest(1)">
+      <span class="test-label">Test 2 — No tools</span>
+      <span class="test-sub">Jennifer Torres · Broward · No-shows</span>
+    </button>
+    <button class="test-btn" onclick="selectTest(2)">
+      <span class="test-label">Test 3 — RevenueWell</span>
+      <span class="test-sub">Stephanie Blanc · Palm Beach · New patients</span>
+    </button>
+
+    <div class="nav-items">
+      <div class="section-label" style="margin-top:0;">Output sections</div>
+      <button class="nav-item active" id="nav-cover" onclick="showSection('cover')">Cover</button>
+      <button class="nav-item" id="nav-pain_section" onclick="showSection('pain_section')">Pain points</button>
+      <button class="nav-item" id="nav-why_dentaledge" onclick="showSection('why_dentaledge')">Why us</button>
+      <button class="nav-item" id="nav-competitor_comparison" onclick="showSection('competitor_comparison')">Vs. competitor</button>
+      <button class="nav-item" id="nav-roi_section" onclick="showSection('roi_section')">ROI</button>
+      <button class="nav-item" id="nav-recommendation" onclick="showSection('recommendation')">Recommendation</button>
+      <button class="nav-item" id="nav-faq" onclick="showSection('faq')">FAQ</button>
+      <button class="nav-item" id="nav-closing" onclick="showSection('closing')">Closing</button>
+      <button class="nav-item" id="nav-metadata" onclick="showSection('metadata')">Metadata</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="test-indicator" id="indicator">
+          <span class="dot"></span>
+          <span id="status-text">Ready</span>
+        </div>
+      </div>
+      <button class="run-btn" id="run-btn" onclick="runTest()">Run test</button>
+    </div>
+
+    <div class="content">
+      <div class="input-panel">
+        <div class="panel-title">Input JSON — Test <span id="test-num">1</span></div>
+        <div class="json-display" id="input-display"></div>
+      </div>
+
+      <div id="output-area">
+        <div class="empty-state">
+          <div style="font-size:28px;color:var(--text3)">◎</div>
+          <p>Hit <strong style="color:var(--text)">Run test</strong> to generate the proposal</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const TESTS = [
+  {label:"Test 1",prospect:{first_name:"Carlos",last_name:"Mendez",practice_name:"Coral Way Dental",role:"Owner/Partner",city:"Coral Way",county:"Miami-Dade",specialty:"General",biggest_challenge:"New patients",current_tools:["Weave"],languages:["English","Spanish"]},data4seo:{google_rating:3.9,google_review_count:42,local_rank_position:9,top_local_competitor_name:"Brickell Smiles",top_local_competitor_rating:4.8,top_local_competitor_review_count:287}},
+  {label:"Test 2",prospect:{first_name:"Jennifer",last_name:"Torres",practice_name:"Sunrise Family Dental",role:"Practice Manager",city:"Sunrise",county:"Broward",specialty:"General",biggest_challenge:"No-shows",current_tools:[],languages:["English"]},data4seo:{google_rating:4.3,google_review_count:89,local_rank_position:5,top_local_competitor_name:"Weston Dental Group",top_local_competitor_rating:4.9,top_local_competitor_review_count:203}},
+  {label:"Test 3",prospect:{first_name:"Stephanie",last_name:"Blanc",practice_name:"Palm Beach Smile Studio",role:"Owner/Partner",city:"West Palm Beach",county:"Palm Beach",specialty:"Cosmetic",biggest_challenge:"New patients",current_tools:["RevenueWell"],languages:["English","Portuguese"]},data4seo:{google_rating:4.6,google_review_count:67,local_rank_position:4,top_local_competitor_name:"Boca Dental Excellence",top_local_competitor_rating:4.8,top_local_competitor_review_count:445}}
+];
+
+const SYSTEM = `You are the proposal generation engine for DentalEdge Solutions, a dental growth agency serving independent dental practices in Southeast Florida (Miami-Dade, Broward, and Palm Beach counties).
+
+Your job is to generate a personalized, compelling sales proposal for a dental practice that has submitted an intake form. You will receive:
+1. The prospect's intake form data
+2. Research data about their practice pulled from Data4SEO
+
+Your output must be a valid JSON object. Do not output anything outside the JSON object. No markdown fences.
+
+## DentalEdge Solutions
+Done-for-you dental growth agency. NOT a software platform. We implement, manage, and continuously optimize a complete practice growth system built on GoHighLevel.
+Core advantages: done-for-you managed service, GoHighLevel unified stack, Southeast Florida market expertise, AI-powered at independent practice pricing, transparent pricing, phased four-tier approach.
+One-line position: Every competitor hands you software. We hand you results.
+
+## Tone Rules
+1. Plain direct English. No jargon.
+2. Results not features. "Your front desk handles 25 fewer calls per day" not "our AI Voice Agent uses NLP."
+3. Use "you" and "your practice."
+4. Specific numbers wherever possible. No generic claims.
+5. Never use: leverage, synergy, ecosystem, utilize, streamline, cutting-edge, state-of-the-art, innovative.
+6. Short sentences.
+7. If languages includes Spanish or Portuguese, briefly acknowledge multilingual capability.
+8. Empathize before selling.
+
+## Revenue Calculations
+No-show loss: 5 no-shows/week × $250–$400 × 48 weeks = $60,000–$96,000/year (use as default)
+Missed call loss: 4 missed calls/day × 30% new patient inquiries × $1,200–$2,500 LTV = significant annual loss
+Review impact: rating < 4.5 → "Practices under 4.5 stars lose 30–40% of click-through traffic." review count < 100 → mention appearing less established vs competitors.
+
+## Competitor Callouts
+Weave: "You mentioned you're currently using Weave. Weave handles calls — we handle growth. Those aren't the same thing. Weave improves how you talk to patients who already know you. We build the system that finds new patients, keeps them coming back, and manages your reputation — all without your team lifting a finger."
+RevenueWell: "RevenueWell has solid tools — but tools only work if someone uses them. If your team doesn't have time to run campaigns, monitor analytics, and update content on top of their regular work, the subscription sits unused. We handle all of it for you. Same capabilities, zero staff time required — and we know your specific market."
+No tool: "Right now you're handling everything manually — or relying on disconnected tools that don't talk to each other. That means missed opportunities at every step: calls that go unanswered, patients who never get a follow-up, reviews that never get requested. We replace all of that with one integrated system, fully managed for you."
+
+## Output — return ONLY this JSON, no text outside it:
+{
+  "proposal_title": "The Practice Growth Engine — [Practice Name]",
+  "cover": {
+    "headline": "[punchy headline based on biggest_challenge, max 12 words]",
+    "subheadline": "[one sentence directly addressing their situation]",
+    "prepared_for": "[Dr./Ms./Mr. FirstName LastName — Practice Name]",
+    "prepared_by": "DentalEdge Solutions — Southeast Florida's Dental Growth Agency"
+  },
+  "pain_section": {
+    "headline": "Here's what's costing your practice right now.",
+    "pain_points": [
+      {
+        "title": "[short specific pain point title]",
+        "body": "[2-3 sentences using real data4seo numbers, quantified cost, specific city/competitor references]",
+        "estimated_annual_impact": "[dollar range e.g. '$60,000 – $96,000/year']"
+      },
+      {
+        "title": "[second pain point]",
+        "body": "[2-3 sentences]",
+        "estimated_annual_impact": "[dollar range]"
+      },
+      {
+        "title": "[third pain point]",
+        "body": "[2-3 sentences]",
+        "estimated_annual_impact": "[dollar range]"
+      }
+    ]
+  },
+  "why_dentaledge": {
+    "headline": "One system. Every problem. Done for you.",
+    "intro": "[2 sentences personalized to specialty, city, and challenge]",
+    "advantages": [
+      {"title": "Done-For-You — Not Software You Manage", "body": "Every competitor sells you a software subscription and leaves you to figure it out. We deliver a fully implemented, running system. You run your practice. We run the technology."},
+      {"title": "GoHighLevel Native Stack", "body": "One platform handles your CRM, automations, AI agents, website, funnels, ads attribution, and reporting. No duct-taped tool stack."},
+      {"title": "Southeast Florida Market Expertise", "body": "[Personalize: mention multilingual if Spanish/Portuguese in languages, mention DSO pressure if Miami-Dade or Broward]"},
+      {"title": "Transparent Pricing — No Surprises", "body": "Every package is published with exact pricing. No discovery calls just to get a number. No locked-in contracts required to start."}
+    ]
+  },
+  "competitor_comparison": {
+    "headline": "How we compare to what you're currently using.",
+    "callout": "[Use the correct competitor callout from above based on current_tools. If empty array use the no-tool callout.]",
+    "table_intro": "Here's how we compare to the most common alternatives in the market:"
+  },
+  "roi_section": {
+    "headline": "The math on your practice specifically.",
+    "calculations": [
+      {
+        "scenario": "No-Shows",
+        "current_cost": "[calculated using formula above]",
+        "with_dentaledge": "[one sentence on what changes]",
+        "net_impact": "[conservative annual recovery]"
+      },
+      {
+        "scenario": "Missed Calls",
+        "current_cost": "[calculated using formula above]",
+        "with_dentaledge": "[one sentence on what changes]",
+        "net_impact": "[conservative annual recovery]"
+      },
+      {
+        "scenario": "Weak Online Reputation",
+        "current_cost": "[reference rating vs competitor rating from data4seo]",
+        "with_dentaledge": "[one sentence on what changes]",
+        "net_impact": "[conservative annual recovery]"
+      }
+    ],
+    "summary": "[1-2 sentences: addressing top pain point could recover estimated dollar range per year]"
+  },
+  "recommendation": {
+    "headline": "Our recommendation for [Practice Name].",
+    "package_recommendation": "[Recommend a tier: Foundation, Growth, Authority, or Domination. Lead with their problem in 2 sentences. Explain why this tier fits.]",
+    "next_step": "The best next step is a 20-minute call to walk through this proposal together and answer your questions. No pressure — just a clear conversation about whether this is the right fit for your practice."
+  },
+  "social_proof": {
+    "headline": "Practices like yours are already seeing results.",
+    "note": "Independent dental practices in Southeast Florida using our system report an average 4.8 Google rating within 90 days and 25+ hours per week saved on front desk automation."
+  },
+  "faq": [
+    {"question": "[Question about their current tool or 'What makes you different from X' if no tool then 'Where do I start?']", "answer": "[2 sentences using competitor callout]"},
+    {"question": "How long does it take to get set up?", "answer": "Most practices are fully live within 2-3 weeks. We handle the entire setup — you won't need to dedicate staff time to implementation."},
+    {"question": "What if it doesn't work for my practice?", "answer": "We don't require long-term contracts to start. If you're not seeing results, you're not locked in. Our phased approach is designed so you see impact in the first 30 days."},
+    {"question": "[Generate one more FAQ based on their role or challenge]", "answer": "[Direct brief answer]"}
+  ],
+  "closing": {
+    "headline": "Ready to stop guessing and start growing?",
+    "body": "[Personalized 2-sentence closing referencing their challenge and city. End with clear action.]",
+    "cta": "Book Your 20-Minute Strategy Call"
+  },
+  "metadata": {
+    "generated_at": "[ISO timestamp]",
+    "prospect_google_rating": "[value from data4seo]",
+    "prospect_review_count": "[value from data4seo]",
+    "top_competitor_referenced": "[value from data4seo]",
+    "competitor_tool_addressed": "[first tool from current_tools or 'none']",
+    "package_recommended": "[tier name]",
+    "data_quality": "[complete / partial / minimal based on data4seo fields populated]"
+  }
+}`;
+
+let currentTest = 0;
+let currentSection = 'cover';
+let result = null;
+let rawVisible = false;
+
+function selectTest(i) {
+  currentTest = i;
+  document.querySelectorAll('.test-btn').forEach((b,idx) => b.classList.toggle('active', idx===i));
+  document.getElementById('test-num').textContent = i+1;
+  const {label, ...data} = TESTS[i];
+  document.getElementById('input-display').textContent = JSON.stringify(data, null, 2);
+  result = null;
+  document.getElementById('output-area').innerHTML = `<div class="empty-state"><div style="font-size:28px;color:var(--text3)">◎</div><p>Hit <strong style="color:var(--text)">Run test</strong> to generate the proposal</p></div>`;
+  setStatus('ready','Ready');
+}
+
+function setStatus(state, msg) {
+  const el = document.getElementById('indicator');
+  el.className = 'test-indicator ' + state;
+  document.getElementById('status-text').textContent = msg;
+}
+
+function showSection(key) {
+  if (!result) return;
+  currentSection = key;
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navEl = document.getElementById('nav-'+key);
+  if (navEl) navEl.classList.add('active');
+  renderSection(key);
+}
+
+function renderSection(key) {
+  const s = result[key];
+  const area = document.getElementById('output-area');
+  rawVisible = false;
+
+  const rawBtn = `<div style="display:flex;justify-content:flex-end;margin-top:12px;"><button class="raw-toggle" onclick="toggleRaw()">View raw JSON</button></div><div class="raw-box" id="raw-box" style="display:none;">${JSON.stringify(result, null, 2)}</div>`;
+
+  if (key === 'cover') {
+    area.innerHTML = `
+      <div class="card">
+        <div class="card-title">Cover</div>
+        <div class="field"><div class="field-label">Proposal title</div><div class="field-value" style="font-weight:500;">${result.proposal_title||''}</div></div>
+        <div class="field"><div class="field-label">Headline</div><div class="field-value headline">${s.headline||''}</div></div>
+        <div class="field"><div class="field-label">Subheadline</div><div class="field-value sub">${s.subheadline||''}</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;">
+          <div class="field"><div class="field-label">Prepared for</div><div class="field-value">${s.prepared_for||''}</div></div>
+          <div class="field"><div class="field-label">Prepared by</div><div class="field-value">${s.prepared_by||''}</div></div>
+        </div>
+      </div>${rawBtn}`;
+  } else if (key === 'pain_section') {
+    const pts = (s.pain_points||[]).map(p=>`<div class="pain-card">
+      <div class="pain-title">${p.title||''}</div>
+      <div class="pain-body">${p.body||''}</div>
+      <span class="impact-tag">${p.estimated_annual_impact||''}</span>
+    </div>`).join('');
+    area.innerHTML = `<div class="card"><div class="card-title">Pain points</div><div class="field"><div class="field-label">Section headline</div><div class="field-value" style="font-weight:500;">${s.headline||''}</div></div>${pts}</div>${rawBtn}`;
+  } else if (key === 'why_dentaledge') {
+    const advs = (s.advantages||[]).map(a=>`<div class="advantage"><div class="advantage-title">${a.title||''}</div><div class="advantage-body">${a.body||''}</div></div>`).join('');
+    area.innerHTML = `<div class="card"><div class="card-title">Why DentalEdge</div>
+      <div class="field"><div class="field-label">Headline</div><div class="field-value" style="font-weight:500;">${s.headline||''}</div></div>
+      <div class="field"><div class="field-label">Intro</div><div class="field-value sub">${s.intro||''}</div></div>
+      ${advs}</div>${rawBtn}`;
+  } else if (key === 'competitor_comparison') {
+    area.innerHTML = `<div class="card"><div class="card-title">Competitor comparison</div>
+      <div class="field"><div class="field-label">Headline</div><div class="field-value" style="font-weight:500;">${s.headline||''}</div></div>
+      <div class="callout-box">${s.callout||''}</div>
+      <div class="field"><div class="field-label">Table intro</div><div class="field-value sub">${s.table_intro||''}</div></div>
+    </div>${rawBtn}`;
+  } else if (key === 'roi_section') {
+    const calcs = (s.calculations||[]).map(c=>`<div class="pain-card">
+      <div class="pain-title" style="margin-bottom:10px;">${c.scenario||''}</div>
+      <div class="roi-grid">
+        <div class="roi-cell"><div class="roi-cell-label">Annual revenue lost</div><div class="roi-cell-val loss">${c.current_cost||''}</div></div>
+        <div class="roi-cell"><div class="roi-cell-label">Conservative recovery</div><div class="roi-cell-val gain">${c.net_impact||''}</div></div>
+      </div>
+      <div class="roi-note">${c.with_dentaledge||''}</div>
+    </div>`).join('');
+    area.innerHTML = `<div class="card"><div class="card-title">ROI calculator</div>
+      <div class="field"><div class="field-label">Headline</div><div class="field-value" style="font-weight:500;">${s.headline||''}</div></div>
+      ${calcs}
+      <div class="summary-box">${s.summary||''}</div>
+    </div>${rawBtn}`;
+  } else if (key === 'recommendation') {
+    area.innerHTML = `<div class="card"><div class="card-title">Recommendation</div>
+      <div class="field"><div class="field-label">Headline</div><div class="field-value" style="font-weight:500;">${s.headline||''}</div></div>
+      <div class="field"><div class="field-label">Package recommendation</div><div class="field-value">${s.package_recommendation||''}</div></div>
+      <div class="field"><div class="field-label">Next step</div><div class="field-value sub">${s.next_step||''}</div></div>
+    </div>${rawBtn}`;
+  } else if (key === 'faq') {
+    const faqs = (Array.isArray(s)?s:[]).map(f=>`<div class="faq-item"><div class="faq-q">${f.question||''}</div><div class="faq-a">${f.answer||''}</div></div>`).join('');
+    area.innerHTML = `<div class="card"><div class="card-title">FAQ</div>${faqs}</div>${rawBtn}`;
+  } else if (key === 'closing') {
+    area.innerHTML = `<div class="card"><div class="card-title">Closing</div>
+      <div class="field"><div class="field-label">Headline</div><div class="field-value headline">${s.headline||''}</div></div>
+      <div class="field"><div class="field-label">Body</div><div class="field-value sub">${s.body||''}</div></div>
+      <div class="cta-bar" style="margin-top:16px;">
+        <span style="font-size:13px;color:var(--text2);">Call to action</span>
+        <div class="cta-btn">${s.cta||''}</div>
+      </div>
+    </div>${rawBtn}`;
+  } else if (key === 'metadata') {
+    const entries = Object.entries(s||{});
+    const cells = entries.map(([k,v])=>`<div class="meta-cell"><div class="meta-key">${k.replace(/_/g,' ')}</div><div class="meta-val">${v||'—'}</div></div>`).join('');
+    area.innerHTML = `<div class="card"><div class="card-title">Metadata</div><div class="meta-grid">${cells}</div></div>${rawBtn}`;
+  }
+}
+
+function toggleRaw() {
+  rawVisible = !rawVisible;
+  const el = document.getElementById('raw-box');
+  if (el) el.style.display = rawVisible ? 'block' : 'none';
+}
+
+async function runTest() {
+  const btn = document.getElementById('run-btn');
+  btn.disabled = true;
+  btn.textContent = 'Running...';
+  setStatus('running', 'Calling Claude API...');
+
+  try {
+    const {label, ...payload} = TESTS[currentTest];
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4000,
+        system: SYSTEM,
+        messages: [{role:'user', content: JSON.stringify(payload)}]
+      })
+    });
+
+    if (!res.ok) { const t = await res.text(); throw new Error(`API ${res.status}: ${t}`); }
+
+    const data = await res.json();
+    let raw = data.content.map(c=>c.text||'').join('');
+    raw = raw.trim().replace(/^```[a-z]*\n?/,'').replace(/```$/,'').trim();
+    result = JSON.parse(raw);
+
+    setStatus('success', 'Proposal generated');
+    showSection('cover');
+  } catch(e) {
+    setStatus('error', 'Error: ' + e.message);
+    document.getElementById('output-area').innerHTML = `<div class="card" style="border-color:rgba(247,111,111,0.2);"><div style="color:var(--red);font-weight:500;margin-bottom:8px;">Error</div><div style="font-family:var(--mono);font-size:12px;color:var(--text2);">${e.message}</div></div>`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Run test';
+  }
+}
+
+selectTest(0);
+</script>
+</body>
+</html>

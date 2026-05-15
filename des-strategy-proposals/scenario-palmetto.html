@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palmetto Dental Studio — 90-Day Growth Scenario | DentalEdge Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #4B3AC9; --purple-dark: #2D1F9E; --purple-deep: #1A1063;
+    --purple-light: #EEEcFF; --purple-mid: #7B6EE8;
+    --coral: #E8472A; --coral-light: #FFF1EE;
+    --ink: #0F0D1A; --ink-60: #4A4660; --ink-40: #8C89A0;
+    --surface: #F7F6FB; --border: #E4E1F5; --white: #FFFFFF;
+    --gold: #C9962A; --gold-light: #FFF8E8;
+    --green: #1A7A52; --green-light: #E8F7F1; --green-mid: #2A9E6A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--ink); background: #F0EFF8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @media print { body { background: white; font-size: 13px; } .card { page-break-inside: avoid; } @page { margin: 0.75in; size: letter; } }
+  h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.15; }
+  p { line-height: 1.7; color: var(--ink-60); }
+  strong { color: var(--ink); font-weight: 600; }
+
+  .page-wrapper { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .scenario-banner { background: var(--gold-light); border: 1px solid #E8C96A; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--ink-60); }
+  .scenario-banner strong { color: var(--gold); }
+
+  .hero { background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-dark) 60%, #3D2FB5 100%); border-radius: 16px; padding: 64px 56px 56px; color: white; margin-bottom: 32px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 24px; }
+  .hero h1 { font-size: 38px; font-weight: 800; color: white; line-height: 1.1; margin-bottom: 16px; max-width: 640px; position: relative; z-index: 1; }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 48px; position: relative; z-index: 1; }
+  .hero-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 12px; overflow: hidden; position: relative; z-index: 1; }
+  .hero-metric { background: rgba(255,255,255,0.08); padding: 24px 20px; text-align: center; }
+  .hero-metric:first-child { border-radius: 12px 0 0 12px; }
+  .hero-metric:last-child { border-radius: 0 12px 12px 0; }
+  .metric-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .metric-before { font-family: 'Sora', sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+  .metric-after { font-family: 'Sora', sans-serif; font-size: 32px; font-weight: 800; color: white; margin-bottom: 4px; }
+  .metric-delta { display: inline-block; background: var(--green-mid); color: white; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+
+  .card { background: white; border-radius: 16px; padding: 48px 52px; margin-bottom: 24px; border: 1px solid var(--border); }
+  .card-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 12px; }
+  .card h2 { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
+  .card h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+
+  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .profile-item { background: var(--surface); border-radius: 10px; padding: 16px 20px; }
+  .profile-item-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-40); margin-bottom: 4px; }
+  .profile-item-value { font-size: 15px; font-weight: 600; color: var(--ink); }
+
+  .challenge-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .challenge-list li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; background: var(--coral-light); border-left: 3px solid var(--coral); border-radius: 0 8px 8px 0; }
+  .challenge-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .challenge-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+  .challenge-text span { font-size: 13px; color: var(--ink-60); }
+
+  .phases { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
+  .phase { display: flex; gap: 20px; align-items: flex-start; }
+  .phase-number { width: 40px; height: 40px; border-radius: 50%; background: var(--purple-light); color: var(--purple); font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .phase-content h3 { font-size: 16px; margin-bottom: 6px; }
+  .phase-content p { font-size: 14px; }
+  .phase-tag { display: inline-block; background: var(--purple-light); color: var(--purple); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; margin-bottom: 8px; letter-spacing: 0.05em; }
+
+  .timeline { position: relative; margin-top: 32px; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 32px; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot { position: absolute; left: -28px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--purple); border: 3px solid white; box-shadow: 0 0 0 2px var(--purple); }
+  .timeline-month { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
+  .timeline-item h3 { font-size: 16px; margin-bottom: 8px; }
+  .timeline-wins { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .win-chip { background: var(--green-light); color: var(--green); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px; }
+
+  .results-table { width: 100%; border-collapse: collapse; margin-top: 32px; font-size: 14px; }
+  .results-table th { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-40); padding: 10px 16px; text-align: left; border-bottom: 2px solid var(--border); }
+  .results-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--ink-60); vertical-align: middle; }
+  .results-table tr:last-child td { border-bottom: none; }
+  .results-table .metric-name { font-weight: 600; color: var(--ink); }
+  .val-before { color: var(--ink-40); }
+  .val-after { font-weight: 700; color: var(--green); font-size: 15px; }
+  .val-delta { display: inline-flex; align-items: center; gap: 4px; background: var(--green-light); color: var(--green); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+
+  .wins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  .win-card { background: var(--green-light); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .win-card-icon { font-size: 28px; margin-bottom: 12px; }
+  .win-card-number { font-family: 'Sora', sans-serif; font-size: 30px; font-weight: 800; color: var(--green); margin-bottom: 4px; line-height: 1; }
+  .win-card-label { font-size: 13px; color: var(--ink-60); line-height: 1.4; }
+
+  .quote-card { background: var(--purple-deep); border-radius: 16px; padding: 48px 52px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .quote-card::before { content: '\201C'; position: absolute; top: -20px; left: 40px; font-family: 'Sora', sans-serif; font-size: 180px; color: rgba(255,255,255,0.06); line-height: 1; pointer-events: none; }
+  .quote-text { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 500; color: white; line-height: 1.5; margin-bottom: 28px; position: relative; z-index: 1; font-style: italic; }
+  .quote-attribution { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
+  .quote-avatar { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+  .quote-name { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; color: white; }
+  .quote-title { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+  .cta-card { background: linear-gradient(135deg, var(--coral) 0%, #C93520 100%); border-radius: 16px; padding: 56px 52px; text-align: center; color: white; margin-bottom: 24px; }
+  .cta-card h2 { font-size: 32px; font-weight: 800; color: white; margin-bottom: 14px; }
+  .cta-card p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-btn { display: inline-block; background: white; color: var(--coral); font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 8px; text-decoration: none; }
+  .cta-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 14px; }
+  .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--ink-40); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 28px 36px; } .hero h1 { font-size: 28px; }
+    .hero-metrics { grid-template-columns: 1fr; } .card { padding: 32px 24px; }
+    .profile-grid, .wins-grid { grid-template-columns: 1fr; }
+    .quote-card, .cta-card { padding: 36px 28px; } .quote-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <div class="scenario-banner">
+    <span>⚠️</span>
+    <div><strong>Scenario Study:</strong> This document shows a projected 90-day outcome based on DentalEdge Solutions' typical results for practices in this situation. Actual results from this engagement will replace these projections as data is collected.</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">90-Day Scenario · The Underdog Breakout</div>
+    <h1>How Palmetto Dental Studio Broke Into the Top 5 — in Hialeah's Most Competitive Market</h1>
+    <p class="hero-sub">Hialeah, FL · Family &amp; Cosmetic Dentistry · Majority Spanish-Speaking Market</p>
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <div class="metric-label">Google Maps Rank</div>
+        <div class="metric-before">Was: Outside top 10</div>
+        <div class="metric-after">#5</div>
+        <div class="metric-delta">Top 5 in 90 days</div>
+      </div>
+      <div class="hero-metric">
+        <div class="metric-label">Google Reviews</div>
+        <div class="metric-before">Was: 68</div>
+        <div class="metric-after">115+</div>
+        <div class="metric-delta">+47 new reviews</div>
+      </div>
+      <div class="hero-metric">
+        <div class="metric-label">New Patients / Month</div>
+        <div class="metric-before">Was: ~8 est.</div>
+        <div class="metric-after">25+</div>
+        <div class="metric-delta">+210% est.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Practice</div>
+    <h2>Meet Palmetto Dental Studio</h2>
+    <p>Palmetto Dental Studio is a family and cosmetic dentistry practice serving West Hialeah — a dense, predominantly Spanish-speaking community with strong family values and high demand for quality dental care. With a 4.8-star rating and personalized service that patients rave about, Palmetto has everything needed to thrive. The challenge: in a city where the top competitor has over 1,100 reviews, 68 reviews keeps you invisible.</p>
+    <div class="profile-grid">
+      <div class="profile-item"><div class="profile-item-label">Location</div><div class="profile-item-value">Hialeah, FL (West Hialeah)</div></div>
+      <div class="profile-item"><div class="profile-item-label">Specialty</div><div class="profile-item-value">Family &amp; Cosmetic Dentistry</div></div>
+      <div class="profile-item"><div class="profile-item-label">Google Rating</div><div class="profile-item-value">4.8 ⭐ (68 reviews)</div></div>
+      <div class="profile-item"><div class="profile-item-label">Market</div><div class="profile-item-value">80%+ Spanish-speaking — bilingual essential</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Challenge</div>
+    <h2>Great Care. Zero Visibility. A City That Speaks Spanish.</h2>
+    <p>Palmetto Dental Studio faces the steepest climb of any practice in this portfolio — not because of poor quality, but because of market dynamics. Hialeah is one of the most concentrated dental markets in South Florida, and the leading practices have built massive review moats over years. Starting at 68 reviews with no Spanish digital presence is a compounded disadvantage.</p>
+    <ul class="challenge-list">
+      <li>
+        <div class="challenge-icon">📍</div>
+        <div class="challenge-text">
+          <strong>Completely absent from Google Maps for primary market keyword</strong>
+          <span>"Dentist Hialeah FL" returns 10 competitors — none of them is Palmetto. The top result has 1,105 reviews; even the #10 practice has more reviews than Palmetto.</span>
+        </div>
+      </li>
+      <li>
+        <div class="challenge-icon">⭐</div>
+        <div class="challenge-text">
+          <strong>68 reviews — the lowest starting point in a high-review market</strong>
+          <span>Hialeah's top-10 Map Pack averages 470 reviews per practice. At 68, Palmetto signals "new" to Google's algorithm regardless of actual quality — and new practices get ranked last.</span>
+        </div>
+      </li>
+      <li>
+        <div class="challenge-icon">🇪🇸</div>
+        <div class="challenge-text">
+          <strong>No Spanish-language presence in a market that's 85% Hispanic</strong>
+          <span>Hialeah is one of the most Spanish-speaking cities in the country. An English-only website and GBP is a trust gap that costs appointments — patients choose practices that speak to them in their language.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The DentalEdge Growth System</div>
+    <h2>Three Phases. One Goal: Break Into the Map Pack.</h2>
+    <p>For practices starting from zero visibility, speed matters. We prioritize the highest-leverage moves first — Spanish content, review velocity, and hyper-local GBP signals — then layer in service-specific pages as momentum builds.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-number">1</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 1–30 · Foundation</div>
+          <h3>Full Spanish GBP Buildout &amp; Emergency Review Activation</h3>
+          <p>Complete Google Business Profile rebuild in Spanish and English — bilingual description, service categories, Spanish Q&amp;A, photo refresh. Review collection system activated via SMS in Spanish. Citation cleanup across 40+ directories targeting Hialeah-specific signals.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">2</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 31–60 · Momentum</div>
+          <h3>Spanish-Language Website Content &amp; Local Authority Building</h3>
+          <p>Spanish-language homepage and service pages published. Blog content targeting "dentista en Hialeah," "dentista para niños Hialeah," and family dentistry terms. Outreach to Hialeah community organizations, Spanish-language media, and local business directories for backlink authority.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">3</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 61–90 · Scale</div>
+          <h3>Family Plan &amp; Insurance-Friendly Messaging</h3>
+          <p>Service pages for pediatric dentistry, family dental plans, and financing options — targeting the family-focused Hialeah demographic. GHL nurture sequences for families with multiple members. Referral program launched targeting community word-of-mouth through church, school, and neighborhood networks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Results</div>
+    <h2>What Changes — Month by Month</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 1 — Days 1–30</div>
+        <h3>Spanish Content Activates — First Map Pack Appearances</h3>
+        <p>With the bilingual GBP live and SMS review collection running, Palmetto begins appearing in Spanish-language searches that competitors' English-only profiles miss. Review count climbs from 68 to 83 — a signal boost that starts moving the algorithm.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">+15 new reviews</span>
+          <span class="win-chip">Spanish GBP live</span>
+          <span class="win-chip">Appears for "dentista Hialeah"</span>
+          <span class="win-chip">Citation cleanup done</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 2 — Days 31–60</div>
+        <h3>Entering the Map Pack — Spanish Keywords Ranking</h3>
+        <p>Spanish-language pages begin ranking for family dentistry and pediatric terms. Palmetto enters the top 10 for "dentist Hialeah" for the first time. New patient calls begin increasing, particularly from Spanish-speaking families.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">+18 new reviews</span>
+          <span class="win-chip">Enters top 10 Maps</span>
+          <span class="win-chip">Spanish pages ranking</span>
+          <span class="win-chip">+6 new patients tracked</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 3 — Days 61–90</div>
+        <h3>Top 5 — Family Referral Network Activating</h3>
+        <p>Palmetto reaches top 5 in Maps with 115+ reviews and a strong bilingual presence. Family plan messaging resonates with Hialeah's family-oriented culture. Word-of-mouth referrals accelerating through community networks activated in Phase 3.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">#5 Google Maps</span>
+          <span class="win-chip">+14 new reviews</span>
+          <span class="win-chip">115+ total reviews</span>
+          <span class="win-chip">Family referral program live</span>
+        </div>
+      </div>
+    </div>
+
+    <table class="results-table">
+      <thead>
+        <tr><th>Metric</th><th>Before</th><th>After 90 Days</th><th>Change</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="metric-name">Google Maps Rank ("dentist Hialeah FL")</td><td class="val-before">Outside top 10</td><td class="val-after">#5</td><td><span class="val-delta">↑ First Map Pack entry</span></td></tr>
+        <tr><td class="metric-name">Google Reviews</td><td class="val-before">68</td><td class="val-after">115+</td><td><span class="val-delta">+47 reviews</span></td></tr>
+        <tr><td class="metric-name">Review Velocity</td><td class="val-before">~1–2 / month</td><td class="val-after">16 / month</td><td><span class="val-delta">+800%+</span></td></tr>
+        <tr><td class="metric-name">New Patients / Month (est.)</td><td class="val-before">~8</td><td class="val-after">25+</td><td><span class="val-delta">+210%</span></td></tr>
+        <tr><td class="metric-name">Spanish-Language Keyword Rankings</td><td class="val-before">None</td><td class="val-after">Top 5 for 6+ terms</td><td><span class="val-delta">Entirely new channel</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">By the Numbers</div>
+    <h2>Three Wins That Flip the Script</h2>
+    <div class="wins-grid">
+      <div class="win-card">
+        <div class="win-card-icon">📍</div>
+        <div class="win-card-number">#5</div>
+        <div class="win-card-label">Google Maps rank for "dentist Hialeah FL" — up from completely absent</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-icon">🇪🇸</div>
+        <div class="win-card-number">6+</div>
+        <div class="win-card-label">Spanish keyword rankings — "dentista Hialeah," "dentista niños," and more</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-icon">👨‍👩‍👧</div>
+        <div class="win-card-number">+17</div>
+        <div class="win-card-label">Net new patients per month — driven by Spanish content and family referral program</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <div class="quote-text">
+      "Hialeah is a tough market. Everyone told us we needed years to build up reviews before we'd be visible. DentalEdge proved them wrong. Ninety days and we're in the Map Pack — and our phone is ringing in Spanish."
+    </div>
+    <div class="quote-attribution">
+      <div class="quote-avatar">P</div>
+      <div>
+        <div class="quote-name">Dr. [Name], DMD</div>
+        <div class="quote-title">Lead Dentist · Palmetto Dental Studio, Hialeah FL</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-card">
+    <h2>Is Your Practice Next?</h2>
+    <p>We take on a limited number of South Florida practices each quarter. Request your free Practice Audit and get a personalized growth plan within 48 hours.</p>
+    <a href="#" class="cta-btn">Get Your Free Practice Audit</a>
+    <div class="cta-sub">No contracts · No setup fees · Results in 90 days</div>
+  </div>
+
+  <div class="footer">
+    &copy; 2026 DentalEdge Solutions · South Florida's Dental Growth Specialists<br>
+    <a href="https://dentaledgesolutions.com" style="color: var(--ink-40); text-decoration: none;">dentaledgesolutions.com</a>
+  </div>
+</div>
+</body>
+</html>

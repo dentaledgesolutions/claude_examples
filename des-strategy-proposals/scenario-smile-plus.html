@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smile Plus Dental — 90-Day Growth Scenario | DentalEdge Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #4B3AC9; --purple-dark: #2D1F9E; --purple-deep: #1A1063;
+    --purple-light: #EEEcFF; --purple-mid: #7B6EE8;
+    --coral: #E8472A; --coral-light: #FFF1EE;
+    --ink: #0F0D1A; --ink-60: #4A4660; --ink-40: #8C89A0;
+    --surface: #F7F6FB; --border: #E4E1F5; --white: #FFFFFF;
+    --gold: #C9962A; --gold-light: #FFF8E8;
+    --green: #1A7A52; --green-light: #E8F7F1; --green-mid: #2A9E6A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--ink); background: #F0EFF8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @media print { body { background: white; font-size: 13px; } .card { page-break-inside: avoid; } @page { margin: 0.75in; size: letter; } }
+  h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.15; }
+  p { line-height: 1.7; color: var(--ink-60); }
+  strong { color: var(--ink); font-weight: 600; }
+
+  .page-wrapper { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* SCENARIO NOTICE BANNER */
+  .scenario-banner {
+    background: var(--gold-light);
+    border: 1px solid #E8C96A;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--ink-60);
+  }
+  .scenario-banner strong { color: var(--gold); }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-dark) 60%, #3D2FB5 100%); border-radius: 16px; padding: 64px 56px 56px; color: white; margin-bottom: 32px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 24px; }
+  .hero h1 { font-size: 38px; font-weight: 800; color: white; line-height: 1.1; margin-bottom: 16px; max-width: 640px; position: relative; z-index: 1; }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 48px; position: relative; z-index: 1; }
+  .hero-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 12px; overflow: hidden; position: relative; z-index: 1; }
+  .hero-metric { background: rgba(255,255,255,0.08); padding: 24px 20px; text-align: center; }
+  .hero-metric:first-child { border-radius: 12px 0 0 12px; }
+  .hero-metric:last-child { border-radius: 0 12px 12px 0; }
+  .metric-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .metric-before { font-family: 'Sora', sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+  .metric-after { font-family: 'Sora', sans-serif; font-size: 32px; font-weight: 800; color: white; margin-bottom: 4px; }
+  .metric-delta { display: inline-block; background: var(--green-mid); color: white; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+
+  /* CARDS */
+  .card { background: white; border-radius: 16px; padding: 48px 52px; margin-bottom: 24px; border: 1px solid var(--border); }
+  .card-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 12px; }
+  .card h2 { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
+  .card h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+
+  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .profile-item { background: var(--surface); border-radius: 10px; padding: 16px 20px; }
+  .profile-item-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-40); margin-bottom: 4px; }
+  .profile-item-value { font-size: 15px; font-weight: 600; color: var(--ink); }
+
+  .challenge-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .challenge-list li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; background: var(--coral-light); border-left: 3px solid var(--coral); border-radius: 0 8px 8px 0; }
+  .challenge-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .challenge-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+  .challenge-text span { font-size: 13px; color: var(--ink-60); }
+
+  .phases { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
+  .phase { display: flex; gap: 20px; align-items: flex-start; }
+  .phase-number { width: 40px; height: 40px; border-radius: 50%; background: var(--purple-light); color: var(--purple); font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .phase-content h3 { font-size: 16px; margin-bottom: 6px; }
+  .phase-content p { font-size: 14px; }
+  .phase-tag { display: inline-block; background: var(--purple-light); color: var(--purple); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; margin-bottom: 8px; letter-spacing: 0.05em; }
+
+  .timeline { position: relative; margin-top: 32px; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 32px; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot { position: absolute; left: -28px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--purple); border: 3px solid white; box-shadow: 0 0 0 2px var(--purple); }
+  .timeline-month { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
+  .timeline-item h3 { font-size: 16px; margin-bottom: 8px; }
+  .timeline-wins { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .win-chip { background: var(--green-light); color: var(--green); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px; }
+
+  .results-table { width: 100%; border-collapse: collapse; margin-top: 32px; font-size: 14px; }
+  .results-table th { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-40); padding: 10px 16px; text-align: left; border-bottom: 2px solid var(--border); }
+  .results-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--ink-60); vertical-align: middle; }
+  .results-table tr:last-child td { border-bottom: none; }
+  .results-table .metric-name { font-weight: 600; color: var(--ink); }
+  .val-before { color: var(--ink-40); }
+  .val-after { font-weight: 700; color: var(--green); font-size: 15px; }
+  .val-delta { display: inline-flex; align-items: center; gap: 4px; background: var(--green-light); color: var(--green); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+
+  .wins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  .win-card { background: var(--green-light); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .win-card-icon { font-size: 28px; margin-bottom: 12px; }
+  .win-card-number { font-family: 'Sora', sans-serif; font-size: 30px; font-weight: 800; color: var(--green); margin-bottom: 4px; line-height: 1; }
+  .win-card-label { font-size: 13px; color: var(--ink-60); line-height: 1.4; }
+
+  .quote-card { background: var(--purple-deep); border-radius: 16px; padding: 48px 52px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .quote-card::before { content: '\201C'; position: absolute; top: -20px; left: 40px; font-family: 'Sora', sans-serif; font-size: 180px; color: rgba(255,255,255,0.06); line-height: 1; pointer-events: none; }
+  .quote-text { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 500; color: white; line-height: 1.5; margin-bottom: 28px; position: relative; z-index: 1; font-style: italic; }
+  .quote-attribution { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
+  .quote-avatar { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+  .quote-name { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; color: white; }
+  .quote-title { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+  .cta-card { background: linear-gradient(135deg, var(--coral) 0%, #C93520 100%); border-radius: 16px; padding: 56px 52px; text-align: center; color: white; margin-bottom: 24px; }
+  .cta-card h2 { font-size: 32px; font-weight: 800; color: white; margin-bottom: 14px; }
+  .cta-card p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-btn { display: inline-block; background: white; color: var(--coral); font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 8px; text-decoration: none; }
+  .cta-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 14px; }
+  .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--ink-40); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 28px 36px; } .hero h1 { font-size: 28px; }
+    .hero-metrics { grid-template-columns: 1fr; } .card { padding: 32px 24px; }
+    .profile-grid, .wins-grid { grid-template-columns: 1fr; }
+    .quote-card, .cta-card { padding: 36px 28px; } .quote-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <div class="scenario-banner">
+    <span>⚠️</span>
+    <div><strong>Scenario Study:</strong> This document shows a projected 90-day outcome based on DentalEdge Solutions' typical results for practices in this situation. Actual results from this engagement will replace these projections as data is collected.</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">90-Day Scenario · The Hidden Gem</div>
+    <h1>How Smile Plus Dental Could Add 18+ New Patients Per Month by Getting Found</h1>
+    <p class="hero-sub">Homestead, FL · General, Implants &amp; Invisalign · Bilingual South Dade Market</p>
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <div class="metric-label">Google Maps Rank</div>
+        <div class="metric-before">Was: Outside top 10</div>
+        <div class="metric-after">#3</div>
+        <div class="metric-delta">Top 3 in 90 days</div>
+      </div>
+      <div class="hero-metric">
+        <div class="metric-label">Google Reviews</div>
+        <div class="metric-before">Was: 286</div>
+        <div class="metric-after">340+</div>
+        <div class="metric-delta">+54 new reviews</div>
+      </div>
+      <div class="hero-metric">
+        <div class="metric-label">New Patients / Month</div>
+        <div class="metric-before">Was: ~12 est.</div>
+        <div class="metric-after">30+</div>
+        <div class="metric-delta">+150% est.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Practice</div>
+    <h2>Meet Smile Plus Dental</h2>
+    <p>Smile Plus Dental has served the Homestead community for years, building a reputation for gentle, comprehensive care — from routine cleanings to full dental implants and Invisalign. With a 4.8-star rating and 286 Google reviews, patients who find them love them. The problem: almost no one can find them.</p>
+    <div class="profile-grid">
+      <div class="profile-item"><div class="profile-item-label">Location</div><div class="profile-item-value">Homestead, FL (South Dade)</div></div>
+      <div class="profile-item"><div class="profile-item-label">Specialty</div><div class="profile-item-value">General, Implants, Invisalign</div></div>
+      <div class="profile-item"><div class="profile-item-label">Google Rating</div><div class="profile-item-value">4.8 ⭐ (286 reviews)</div></div>
+      <div class="profile-item"><div class="profile-item-label">Market</div><div class="profile-item-value">Bilingual — heavily Spanish-speaking</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Challenge</div>
+    <h2>A 4.8-Star Practice That No One Could Find</h2>
+    <p>Smile Plus had everything a growing practice needs — clinical skills, loyal patients, and a sterling reputation. What they lacked was online visibility. Despite 286 five-star reviews, they didn't appear in the top 10 Google Maps results for "dentist Homestead FL."</p>
+    <ul class="challenge-list">
+      <li>
+        <div class="challenge-icon">📍</div>
+        <div class="challenge-text">
+          <strong>Invisible on Google Maps for every primary search term</strong>
+          <span>Searching "dentist Homestead FL" returns 10 competitors. Smile Plus is not among them — despite having more reviews than 6 of those 10 practices.</span>
+        </div>
+      </li>
+      <li>
+        <div class="challenge-icon">⭐</div>
+        <div class="challenge-text">
+          <strong>Review velocity stalled — no active collection system</strong>
+          <span>286 reviews accumulated over years, but with no automated follow-up, new reviews trickle in one or two a month while competitors aggressively grow their counts.</span>
+        </div>
+      </li>
+      <li>
+        <div class="challenge-icon">🇪🇸</div>
+        <div class="challenge-text">
+          <strong>No Spanish-language digital presence in a bilingual market</strong>
+          <span>Over 70% of Homestead residents are Spanish-speaking. Smile Plus's website and Google Business Profile are English-only — a critical gap in a market where language signals trust.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The DentalEdge Growth System</div>
+    <h2>Three Phases. One Goal: Fill the Schedule.</h2>
+    <p>We don't run generic ad campaigns. Every engagement runs through our three-phase growth system, customized to each practice's market and patient mix.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-number">1</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 1–30 · Foundation</div>
+          <h3>Google Business Profile Rebuild &amp; Bilingual Optimization</h3>
+          <p>Full GBP audit and rebuild — categories, service areas, Spanish-language description, photo refresh, and Q&amp;A seeding. Citation cleanup across 40+ directories. Review collection system activated via automated post-visit SMS.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">2</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 31–60 · Momentum</div>
+          <h3>Spanish Content Launch &amp; Local Link Building</h3>
+          <p>Spanish-language landing page published targeting "dentista en Homestead." Local link-building campaign targeting Homestead Chamber, South Dade news, and community Spanish-language sites. GHL follow-up sequences activated for new patient leads.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">3</div>
+        <div class="phase-content">
+          <div class="phase-tag">Days 61–90 · Scale</div>
+          <h3>High-Value Service Targeting (Implants &amp; Invisalign)</h3>
+          <p>Dedicated landing pages for dental implants and Invisalign in Homestead — targeting high-intent searches with strong local signals. Patient referral loop activated: automated referral ask sequence deployed to existing patient base.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">The Results</div>
+    <h2>What Changes — Month by Month</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 1 — Days 1–30</div>
+        <h3>Google Business Profile Enters the Map Pack</h3>
+        <p>After the GBP rebuild and citation cleanup, Smile Plus begins appearing in searches it was previously absent from. Review velocity jumps from ~2/month to 18/month with the SMS follow-up system active.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">GBP fully rebuilt</span>
+          <span class="win-chip">+18 new reviews</span>
+          <span class="win-chip">Appears in top 10 for 3 new keywords</span>
+          <span class="win-chip">Spanish description live</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 2 — Days 31–60</div>
+        <h3>Climbing to Top 5 — Spanish Content Drives New Segment</h3>
+        <p>Spanish-language page begins ranking for "dentista en Homestead" and related terms. Implant and Invisalign keyword rankings begin moving. New patient calls increase noticeably.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">Top 5 for "dentist Homestead FL"</span>
+          <span class="win-chip">+20 new reviews</span>
+          <span class="win-chip">Spanish page ranking</span>
+          <span class="win-chip">+8 new patients tracked</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 3 — Days 61–90</div>
+        <h3>Locked Into Top 3 — Implant &amp; Invisalign Leads Flowing</h3>
+        <p>Smile Plus reaches top 3 in Maps for primary keyword. High-value service pages driving implant and Invisalign inquiries. Referral program generating additional organic word-of-mouth growth.</p>
+        <div class="timeline-wins">
+          <span class="win-chip">#3 Google Maps</span>
+          <span class="win-chip">+16 new reviews</span>
+          <span class="win-chip">Implant leads: +4/mo</span>
+          <span class="win-chip">Invisalign leads: +3/mo</span>
+        </div>
+      </div>
+    </div>
+
+    <table class="results-table">
+      <thead>
+        <tr><th>Metric</th><th>Before</th><th>After 90 Days</th><th>Change</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="metric-name">Google Maps Rank ("dentist Homestead FL")</td><td class="val-before">Outside top 10</td><td class="val-after">#3</td><td><span class="val-delta">↑ 7+ positions</span></td></tr>
+        <tr><td class="metric-name">Google Reviews</td><td class="val-before">286</td><td class="val-after">340+</td><td><span class="val-delta">+54 reviews</span></td></tr>
+        <tr><td class="metric-name">Review Velocity</td><td class="val-before">~2 / month</td><td class="val-after">18 / month</td><td><span class="val-delta">+800%</span></td></tr>
+        <tr><td class="metric-name">New Patients / Month (est.)</td><td class="val-before">~12</td><td class="val-after">30+</td><td><span class="val-delta">+150%</span></td></tr>
+        <tr><td class="metric-name">Spanish-Language Visibility</td><td class="val-before">None</td><td class="val-after">Ranking for 5+ terms</td><td><span class="val-delta">New market</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-eyebrow">By the Numbers</div>
+    <h2>Three Wins That Change Everything</h2>
+    <div class="wins-grid">
+      <div class="win-card">
+        <div class="win-card-icon">📍</div>
+        <div class="win-card-number">#3</div>
+        <div class="win-card-label">Google Maps rank for "dentist Homestead FL" — up from outside top 10</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-icon">⭐</div>
+        <div class="win-card-number">+54</div>
+        <div class="win-card-label">New Google reviews in 90 days via automated post-visit follow-up</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-icon">🦷</div>
+        <div class="win-card-number">+18</div>
+        <div class="win-card-label">Net new patients per month — driven by Maps visibility and Spanish content</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <div class="quote-text">
+      "We had the reviews. We had the skills. We just weren't showing up. Now when someone in Homestead searches for a dentist, we're right there — and our schedule is fuller than it's ever been."
+    </div>
+    <div class="quote-attribution">
+      <div class="quote-avatar">D</div>
+      <div>
+        <div class="quote-name">Dr. [Name], DMD</div>
+        <div class="quote-title">Lead Dentist · Smile Plus Dental, Homestead FL</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-card">
+    <h2>Is Your Practice Next?</h2>
+    <p>We take on a limited number of South Florida practices each quarter. Request your free Practice Audit and get a personalized growth plan within 48 hours.</p>
+    <a href="#" class="cta-btn">Get Your Free Practice Audit</a>
+    <div class="cta-sub">No contracts · No setup fees · Results in 90 days</div>
+  </div>
+
+  <div class="footer">
+    &copy; 2026 DentalEdge Solutions · South Florida's Dental Growth Specialists<br>
+    <a href="https://dentaledgesolutions.com" style="color: var(--ink-40); text-decoration: none;">dentaledgesolutions.com</a>
+  </div>
+</div>
+</body>
+</html>
