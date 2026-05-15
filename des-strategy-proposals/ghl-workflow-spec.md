@@ -178,7 +178,7 @@ Claude Code will then:
 
 4. **Generate** a personalized proposal following the structure in `claude-system-prompt.md`
 
-5. **Create the document draft** in GHL Documents & Contracts via MCP — all sections populated (saved as Draft, not sent)
+5. **Write all 10 proposal custom fields** to the contact via `contacts_update-contact` MCP tool — see field mapping table in Part 4 of this document
 
 6. **Move the opportunity** from New Lead → Proposal Drafted
 
@@ -188,7 +188,7 @@ Claude Code will then:
    - Practice's Google rating and review count found
    - Top local competitor identified
    - Which competitor comparison was triggered (based on current tools)
-   - Document draft created — navigate to **Payments → Documents & Contracts** in GHL to review
+   - Custom fields written — open GHL → **Payments → Documents & Contracts** → **+ New Document** → select "DentalEdge Practice Growth Proposal" template → assign to contact → all merge fields auto-populate
 
 **Total time from typing the command to proposal ready:** ~60–90 seconds
 
@@ -196,10 +196,10 @@ Claude Code will then:
 
 ### Reviewing and Sending
 
-1. Click the GHL link Claude Code provides (or navigate to **Payments → Documents & Contracts** in GHL)
-2. Review the draft — check that:
+1. In GHL, navigate to **Payments → Documents & Contracts** → click **+ New Document** → select "DentalEdge Practice Growth Proposal" template → assign to the contact Claude just updated — all merge fields populate automatically from the custom fields Claude wrote
+2. Review the populated document — check that:
    - The practice name and doctor name are correct throughout
-   - The Google data matches what you know about this practice
+   - The Google data (rating, review count, rank) matches what you know about this practice
    - The competitor comparison matches their actual tools
    - The ROI numbers are reasonable for their size
 3. Make any edits directly in the Documents & Contracts editor
@@ -234,6 +234,25 @@ Settings → Custom Fields → Contacts:
 | Biggest Challenge | biggest_challenge | Dropdown |
 | Current Tools | current_tools | Text |
 | Practice Languages | practice_languages | Text |
+
+---
+
+## Part 4 — Proposal Custom Field Reference
+
+These are the 10 fields Claude writes to the contact after generating the proposal JSON. All use the contact model. The double underscore (`__`) is GHL's auto-format from the em dash in the original field names.
+
+| GHL Field Key | Merge Field in Template | What Claude Writes |
+|---|---|---|
+| `proposal__google_rating` | `{{contact.proposal__google_rating}}` | Google rating as string, e.g. `"4.8"` |
+| `proposal__review_count` | `{{contact.proposal__review_count}}` | Review count as string, e.g. `"286"` |
+| `proposal__local_rank` | `{{contact.proposal__local_rank}}` | `"#3"` or `"Outside top 10"` |
+| `proposal__top_competitor` | `{{contact.proposal__top_competitor}}` | `"Brickell Smiles (4.8★, 287 reviews)"` |
+| `proposal__pain_analysis` | `{{contact.proposal__pain_analysis}}` | 2–3 paragraph narrative from pain_section |
+| `proposal__competitor_callout` | `{{contact.proposal__competitor_callout}}` | Competitor callout paragraph from competitor_comparison |
+| `proposal__revenue_opportunity` | `{{contact.proposal__revenue_opportunity}}` | Monthly recovery figure, e.g. `"$8,400/month"` |
+| `proposal__recommended_package` | `{{contact.proposal__recommended_package}}` | Tier name only, e.g. `"Growth"` |
+| `proposal__90day_target` | `{{contact.proposal__90day_target}}` | 1–2 sentence 90-day outcome statement |
+| `proposal__generated_date` | `{{contact.proposal__generated_date}}` | Date, e.g. `"May 15, 2026"` |
 
 ---
 
