@@ -81,34 +81,34 @@
 
 ## Traceability
 
-| REQ-ID | Phase | Status |
-|--------|-------|--------|
-| FOUND-01 | Phase 1: Foundation | — |
-| FOUND-02 | Phase 1: Foundation | — |
-| FOUND-03 | Phase 1: Foundation | — |
-| FOUND-04 | Phase 1: Foundation | — |
-| FOUND-05 | Phase 1: Foundation | — |
-| COMPANY-01 | Phase 2: Company Study | — |
-| COMPANY-02 | Phase 2: Company Study | — |
-| MARKET-01 | Phase 3: Market Study | — |
-| MARKET-02 | Phase 3: Market Study | — |
-| AUDIT-01 | Phase 4: Practice Audit System | — |
-| AUDIT-02 | Phase 4: Practice Audit System | — |
-| AUDIT-03 | Phase 4: Practice Audit System | — |
-| AUDIT-04 | Phase 4: Practice Audit System | — |
-| PROPOSAL-01 | Phase 5: Proposal Engine | — |
-| PROPOSAL-02 | Phase 5: Proposal Engine | — |
-| PROPOSAL-03 | Phase 5: Proposal Engine | — |
-| PROPOSAL-04 | Phase 5: Proposal Engine | — |
-| PROPOSAL-05 | Phase 5: Proposal Engine | — |
-| PORTFOLIO-01 | Phase 6: Portfolio Validation | — |
-| PORTFOLIO-02 | Phase 6: Portfolio Validation | — |
-| BENCH-01 | Phase 7: Benchmarking | — |
-| BENCH-02 | Phase 7: Benchmarking | — |
-| INTELL-01 | Phase 8: Trends Engine | — |
-| INTELL-02 | Phase 8: Trends Engine | — |
-| INTELL-03 | Phase 8: Trends Engine | — |
-| INTELL-04 | Phase 8: Trends Engine | — |
-| CONTENT-01 | Phase 9: Content Pipeline | — |
-| CONTENT-02 | Phase 9: Content Pipeline | — |
-| CONTENT-03 | Phase 9: Content Pipeline | — |
+| REQ-ID | Milestone | Phase | Status |
+|--------|-----------|-------|--------|
+| FOUND-01 | 1 — Knowledge Base | Phase 1: Foundation | Pending |
+| FOUND-02 | 1 — Knowledge Base | Phase 1: Foundation | Pending |
+| FOUND-03 | 1 — Knowledge Base | Phase 1: Foundation | Pending |
+| FOUND-04 | 1 — Knowledge Base | Phase 1: Foundation | Pending |
+| FOUND-05 | 1 — Knowledge Base | Phase 1: Foundation | Pending |
+| COMPANY-01 | 1 — Knowledge Base | Phase 2: Company Study | Pending |
+| COMPANY-02 | 1 — Knowledge Base | Phase 2: Company Study | Pending |
+| MARKET-01 | 1 — Knowledge Base | Phase 3: Market Study | Pending |
+| MARKET-02 | 1 — Knowledge Base | Phase 3: Market Study | Pending |
+| AUDIT-01 | 1 — Knowledge Base | Phase 4: Practice Audit System | Pending |
+| AUDIT-02 | 1 — Knowledge Base | Phase 4: Practice Audit System | Pending |
+| AUDIT-03 | 1 — Knowledge Base | Phase 4: Practice Audit System | Pending |
+| AUDIT-04 | 1 — Knowledge Base | Phase 4: Practice Audit System | Pending |
+| BENCH-01 | 1 — Knowledge Base | Phase 5: Benchmarking | Pending |
+| BENCH-02 | 1 — Knowledge Base | Phase 5: Benchmarking | Pending |
+| INTELL-01 | 1 — Knowledge Base | Phase 6: Trends Engine | Pending |
+| INTELL-02 | 1 — Knowledge Base | Phase 6: Trends Engine | Pending |
+| INTELL-03 | 1 — Knowledge Base | Phase 6: Trends Engine | Pending |
+| INTELL-04 | 1 — Knowledge Base | Phase 6: Trends Engine | Pending |
+| PORTFOLIO-01 | 1 — Knowledge Base | Phase 7: Service Portfolio Validation | Pending |
+| PORTFOLIO-02 | 1 — Knowledge Base | Phase 7: Service Portfolio Validation | Pending |
+| PROPOSAL-01 | 2 — Operational Skills | Phase 8: Proposal Engine | Pending |
+| PROPOSAL-02 | 2 — Operational Skills | Phase 8: Proposal Engine | Pending |
+| PROPOSAL-03 | 2 — Operational Skills | Phase 8: Proposal Engine | Pending |
+| PROPOSAL-04 | 2 — Operational Skills | Phase 8: Proposal Engine | Pending |
+| PROPOSAL-05 | 2 — Operational Skills | Phase 8: Proposal Engine | Pending |
+| CONTENT-01 | 2 — Operational Skills | Phase 9: Content Pipeline | Pending |
+| CONTENT-02 | 2 — Operational Skills | Phase 9: Content Pipeline | Pending |
+| CONTENT-03 | 2 — Operational Skills | Phase 9: Content Pipeline | Pending |
