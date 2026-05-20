@@ -2,3 +2,6 @@
 **/.DS_Store
 .claude/
 **/.claude/
+# Allow project-local Claude Code skills directory to be tracked
+!des-intelligence-platform/.claude/
+!des-intelligence-platform/.claude/**
