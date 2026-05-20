@@ -44,7 +44,13 @@
   3. `audit/field-map.json` documents all GHL custom field IDs and keys for the location
   4. Data4SEO sandbox returns valid results for a test domain via Maps SERP and Business Data endpoints
   5. `knowledge/ghl-config.json` contains `blogId`, `authorId`, and default category ID
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Directory scaffold (all project output paths)
+- [ ] 01-02-PLAN.md — Seed knowledge/services.md from proposal HTML
+- [ ] 01-03-PLAN.md — GHL field map + blog config IDs
+- [ ] 01-04-PLAN.md — Data4SEO sandbox verification
 
 ### Phase 2: Company Study
 **Goal**: Produce an authoritative, structured DES company profile that every skill can reference for services, pricing, positioning, and differentiators.
@@ -162,7 +168,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/0 | Not started | - |
+| 1. Foundation | 0/4 | In progress | - |
 | 2. Company Study | 0/0 | Not started | - |
 | 3. Market Study | 0/0 | Not started | - |
 | 4. Practice Audit System | 0/0 | Not started | - |
